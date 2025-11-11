@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="9MYcGEmT1G3MBy8gguQ3">
-        <mxGraphModel dx="1999" dy="1619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+        <mxGraphModel dx="1724" dy="1619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -166,19 +166,19 @@
                 <mxCell id="fHQtNf6xIbQKZREeXPpP-51" value="password" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
                     <mxGeometry x="190" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="fHQtNf6xIbQKZREeXPpP-56" value="&lt;u&gt;rx_num&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
+                <mxCell id="fHQtNf6xIbQKZREeXPpP-56" value="&lt;u&gt;med_num&lt;/u&gt;" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
                     <mxGeometry x="660" y="690" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="fHQtNf6xIbQKZREeXPpP-57" value="rx_name" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
+                <mxCell id="fHQtNf6xIbQKZREeXPpP-57" value="med_name" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
                     <mxGeometry x="710" y="720" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="fHQtNf6xIbQKZREeXPpP-58" value="rx_dose" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
+                <mxCell id="fHQtNf6xIbQKZREeXPpP-58" value="med_dose" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
                     <mxGeometry x="760" y="740" width="100" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="fHQtNf6xIbQKZREeXPpP-60" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;endArrow=none;endFill=0;" parent="1" source="fHQtNf6xIbQKZREeXPpP-39" target="fHQtNf6xIbQKZREeXPpP-57" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="fHQtNf6xIbQKZREeXPpP-62" value="rx_quantity" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
+                <mxCell id="fHQtNf6xIbQKZREeXPpP-62" value="med_quantity" style="ellipse;whiteSpace=wrap;html=1;align=center;strokeColor=default;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;fillColor=default;" parent="1" vertex="1">
                     <mxGeometry x="830" y="720" width="100" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="fHQtNf6xIbQKZREeXPpP-66" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;endArrow=none;endFill=0;" parent="1" source="fHQtNf6xIbQKZREeXPpP-63" target="fHQtNf6xIbQKZREeXPpP-39" edge="1">
