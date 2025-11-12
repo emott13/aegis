@@ -44,3 +44,46 @@ CREATE TABLE IF NOT EXISTS employees (
     user_id int NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS cares (
+    record_id int PRIMARY KEY AUTO_INCREMENT,
+    med_morn bool,
+    med_noon bool,
+    med_night bool,
+    breakfast bool,
+    lunch bool,
+    dinner bool,
+    care_date date NOT NULL,
+    emp_id int NOT NULL,
+    patient_id int NOT NULL,
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id),
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+);
+
+CREATE TABLE IF NOT EXISTS appointments (
+    appt_id int PRIMARY KEY AUTO_INCREMENT,
+    appt_date date NOT NULL,
+    patient_id int NOT NULL,
+    doctor_id int NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES employees(emp_id)
+);
+
+CREATE TABLE IF NOT EXISTS schedules (
+    schedule_id int PRIMARY KEY AUTO_INCREMENT,
+    schedule_date date NOT NULL,
+    made_by int NOT NULL,
+    doctor_id int NOT NULL,
+    supervisor_id int NOT NULL,
+    care_red int NOT NULL,
+    care_blue int NOT NULL,
+    care_green int NOT NULL,
+    care_yellow int NOT NULL,
+    FOREIGN KEY (made_by) REFERENCES employees(emp_id),
+    FOREIGN KEY (doctor_id) REFERENCES employees(emp_id),
+    FOREIGN KEY (supervisor_id) REFERENCES employees(emp_id),
+    FOREIGN KEY (care_red) REFERENCES employees(emp_id),
+    FOREIGN KEY (care_blue) REFERENCES employees(emp_id),
+    FOREIGN KEY (care_green) REFERENCES employees(emp_id),
+    FOREIGN KEY (care_yellow) REFERENCES employees(emp_id)
+);
