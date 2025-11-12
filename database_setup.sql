@@ -29,6 +29,10 @@ CREATE TABLE IF NOT EXISTS patients (
     em_relation varchar(20),
     admission_date date NOT NULL,
     care_group enum('red', 'blue', 'green', 'yellow'),
+    med_morn varchar(50),
+    med_noon varchar(50),
+    med_night varchar(50),
+    bill_amount int DEFAULT 0,
     user_id int,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
