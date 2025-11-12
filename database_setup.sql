@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
     dob	date NOT NULL,
     phone varchar(10),
     approved bool,
-    role_id int,
+    role_id int NOT NULL,
     FOREIGN KEY(role_id) REFERENCES access_roles(role_id)
 );
 
@@ -33,6 +33,14 @@ CREATE TABLE IF NOT EXISTS patients (
     med_noon varchar(50),
     med_night varchar(50),
     bill_amount int DEFAULT 0,
-    user_id int,
+    user_id int NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+    emp_id int PRIMARY KEY AUTO_INCREMENT,
+    hire_date date NOT NULL,
+    salary int,
+    user_id int NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
