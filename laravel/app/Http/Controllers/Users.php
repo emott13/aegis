@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class Users extends Controller
 {
@@ -11,7 +12,7 @@ class Users extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
     }
 
     /**
@@ -19,7 +20,16 @@ class Users extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'dob' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        return User::create($request->all());
     }
 
     /**
@@ -27,7 +37,7 @@ class Users extends Controller
      */
     public function show(string $id)
     {
-        //
+        return User::findOrFail($id);
     }
 
     /**
@@ -35,7 +45,9 @@ class Users extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user -> update($request->all());
+        return $user;
     }
 
     /**
@@ -43,6 +55,6 @@ class Users extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return User::destroy($id);
     }
 }
