@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS appointments (
     appt_date date NOT NULL,
     patient_id int NOT NULL,
     doctor_id int NOT NULL,
+    appt_comment varchar(255) NOT NULL,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (doctor_id) REFERENCES employees(emp_id)
 );
