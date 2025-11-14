@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('em_lname', 50)->nullable();
             $table->string('em_phone', 10)->nullable();
             $table->string('em_relation', 20)->nullable();
-            $table->date('admission_date');
+            $table->date('admission_date')->default(now());
             $table->enum('care_group', array('red', 'blue', 'green', 'yellow'))->nullable();
             $table->string('med_morn', 50)->nullable();
             $table->string('med_noon', 50)->nullable();
             $table->string('med_night', 50)->nullable();
             $table->integer('bill_amount')->default(0);
 
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->unique();
             $table->foreign('user_id')->references('user_id')->on('users');
 
             $table->timestamps();
