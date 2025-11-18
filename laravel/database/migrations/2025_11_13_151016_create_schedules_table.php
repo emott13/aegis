@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('care_blue')->unsigned();
             $table->bigInteger('care_green')->unsigned();
             $table->bigInteger('care_yellow')->unsigned();
+
             $table->foreign('made_by')->references('emp_id')->on('employees');
             $table->foreign('doctor_id')->references('emp_id')->on('employees');
             $table->foreign('supervisor_id')->references('emp_id')->on('employees');
