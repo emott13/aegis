@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class AccessRole extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class Schedule extends Model
      * The primary key associated with the table.
      * @var string
      */
-    protected $primaryKey = 'schedule_id';
+    protected $primaryKey = 'role_id';
 
     /**
      * The attributes that are mass assignable.
@@ -21,13 +21,7 @@ class Schedule extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'schedule_date',
-        'made_by',
-        'doctor_id',
-        'supervisor_id',
-        'care_red',
-        'care_blue',
-        'care_green',
-        'care_yellow',
+        'role_name',
+        'access_level',
     ];
 }

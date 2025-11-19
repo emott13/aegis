@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('breakfast')->nullable();
             $table->boolean('lunch')->nullable();
             $table->boolean('dinner')->nullable();
-            $table->date('care_date');
+            $table->date('care_date')->default(today());
             
             $table->bigInteger('emp_id')->unsigned();
             $table->bigInteger('patient_id')->unsigned();
