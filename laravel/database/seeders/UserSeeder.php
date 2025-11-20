@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Create X fake users
-        User::factory(50)->create();
+        User::factory(200)->create();
 
         // DB::table('users')->insert([
         //     'fname' => Str::random(10),
