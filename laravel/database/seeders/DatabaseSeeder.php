@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AccessRoleSeeder::class,
             UserSeeder::class,
             PatientSeeder::class,
+            EmployeeSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Models\Patient;
 
 class PatientSeeder extends Seeder
 {
@@ -17,7 +16,7 @@ class PatientSeeder extends Seeder
     {
         $userIds = DB::table('users')
             ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
-            ->where('access_roles.role_name', 'patient')
+            ->whereIn('access_roles.role_name', ['patient', 'family'])
             ->pluck('user_id');
 
         foreach ($userIds as $userId)
