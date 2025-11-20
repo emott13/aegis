@@ -8,22 +8,23 @@ use Illuminate\Support\Facades\DB;
 
 class AccessRoleSeeder extends Seeder
 {
+    // [role, access_level]
+    public $roles = [
+        ['admin', 0],
+        ['supervisor', 1],
+        ['doctor', 2],
+        ['caregiver', 4],
+        ['employee', 5],
+        ['patient', 10],
+        ['family', 10],
+    ];
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $roles = [
-            ['admin', 0],
-            ['employee', 5],
-            ['doctor', 2],
-            ['supervisor', 1],
-            ['caregiver', 4],
-            ['patient', 10],
-            ['family', 10],
-        ];
-
-        foreach ($roles as $role)
+        foreach ($this->roles as $role)
         {
             DB::table('access_roles')->insert(
                 [
