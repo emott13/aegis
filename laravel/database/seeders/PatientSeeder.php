@@ -29,9 +29,9 @@ class PatientSeeder extends Seeder
                 'em_relation' => fake()->randomElement(['mother', 'father', 'sibling', 'brother', 'sister', 'spouse', 'cousin', 'aunt', 'uncle', 'grandmother', 'grandfather']),
                 'admission_date' => fake()->date(),
                 'care_group' => fake()->randomElement(['red', 'blue', 'green', 'yellow']),
-                'med_morn' => fake()->randomElement(['', 'Zyrtec', 'Tylenol']),
-                'med_noon' => fake()->randomElement(['', 'Zyrtec', 'Tylenol']),
-                'med_night' => fake()->randomElement(['', 'Zyrtec', 'Tylenol']),
+                'med_morn' => fake()->optional(.7)->randomElement(['', 'Zyrtec', 'Tylenol']),
+                'med_noon' => fake()->optional(.7)->randomElement(['', 'Zyrtec', 'Tylenol']),
+                'med_night' => fake()->optional(.7)->randomElement(['', 'Zyrtec', 'Tylenol']),
                 'bill_amount' => fake()->randomNumber(),
                 'user_id' => $userId,
             ]);
