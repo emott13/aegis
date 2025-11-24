@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use Auth;
 // use App\Http\Controllers\RegisterController;
 
 /*
@@ -24,3 +25,6 @@ use App\Http\Controllers\LoginController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'registerPage'])->name('register');
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
