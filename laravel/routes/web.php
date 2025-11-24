@@ -22,9 +22,9 @@ use Auth;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'registerPage'])->name('register');
 Auth::routes();
-
+// Route::get('/doctor-appointment', []);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
