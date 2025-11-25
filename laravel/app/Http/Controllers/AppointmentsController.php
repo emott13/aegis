@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 
-class Appointments extends Controller
+class AppointmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -53,5 +53,12 @@ class Appointments extends Controller
     public function destroy(string $id)
     {
         return Appointment::destroy($id);
+    }
+
+    // Return view
+    public function appointmentPage()
+    {
+        // $access_roles = DB::table('access_roles')->get();
+        return view('doctor_appointment');
     }
 }
