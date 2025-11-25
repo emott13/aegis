@@ -26,5 +26,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'registerPage'])->name('register');
 // Auth::routes();
-Route::get('/doctor-appointment', [AppointmentsController::class, 'appointmentPage'])->name('appointments');
+Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
