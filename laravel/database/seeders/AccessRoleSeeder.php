@@ -15,7 +15,7 @@ class AccessRoleSeeder extends Seeder
         ['doctor', 2],
         ['caregiver', 4],
         ['employee', 5],
-        ['patient', 10],
+        ['patient', 9],
         ['family', 10],
     ];
 
