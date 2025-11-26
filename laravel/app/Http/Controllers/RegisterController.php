@@ -25,6 +25,13 @@ class RegisterController extends Controller
             'password_confirm' => 'required|same:password',
             'dob' => 'required|string|max:255',
             'role_id' => 'required|exists:access_roles,role_id',
+
+            // patient
+            'emergency_fname' => '',
+            'emergency_lname' => '',
+            'emergency_phone' => '',
+            'family_code' => '',
+            'emergency_relation' => '',
         ],
         [
             'role_id.exists' => "Role does not exist",

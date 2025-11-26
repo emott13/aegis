@@ -85,7 +85,7 @@
                             placeholder="Password"
                             required
                         >
-                        <small id="passwordHelp" class="form-text text-muted">We'll never share your password with anyone.</small>
+                        <small id="password-help" class="form-text text-muted">We'll never share your password with anyone.</small>
                     </div>
 
                     <div class="form-group col-md-6">
@@ -130,6 +130,64 @@
                                 </option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <br>
+                <div id="patient-emergency-div" class="row alert alert-warning mx-0">
+                    <h3>Emergency Contact Info</h3>
+                    <div class="form-group col-md-6">
+                        <label for="emergency-fname">Emergency Contact First Name</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="emergency-fname"
+                            name="emergency_fname"
+                            placeholder="First Name"
+                        >
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="emergency-lname">Emergency Contact Last Name</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="emergency-lname"
+                            name="emergency_lname"
+                            placeholder="Last Name"
+                        >
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="emergency-phone">Emergency Contact Phone</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="emergency-phone"
+                            name="emergency_phone"
+                            placeholder="Phone number"
+                        >
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="family-code">Family Code</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="family-code"
+                            name="family_code"
+                            placeholder="Banana123"
+                        >
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="emergency-relation">Emergency Relation</label>
+                        <input
+                            class="form-control"
+                            type="password"
+                            id="emergency-relation"
+                            name="emergency_relation"
+                            placeholder="Ex. Father, Mother, Spouse"
+                        >
                     </div>
                 </div>
                 <br>
