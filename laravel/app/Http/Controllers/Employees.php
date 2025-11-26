@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Employee;
 
 class Employees extends Controller
@@ -13,6 +14,12 @@ class Employees extends Controller
     public function index()
     {
         return Employee::all();
+    }
+
+    public function employeeListPage()
+    {   // needs access roles to determine if user can visit page
+        $employees = DB::table('employees')->get();
+        return view('employee_list', ['employees' => $employees]);
     }
 
     /**

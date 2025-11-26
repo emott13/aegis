@@ -17,7 +17,7 @@ class Patients extends Controller
     }
 
     public function patientListPage()
-    {
+    {   // needs access roles to determine if user can visit page
         $patients = DB::table('patients')->get();
         return view('patient_list', ['patients' => $patients]);
     }
