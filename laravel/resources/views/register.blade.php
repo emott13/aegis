@@ -15,7 +15,7 @@
             <br>
 
             {{-- Registration Form --}}
-            <form action="" method="" class="">
+            <form action="{{ route('register.store') }}" method="POST" class="">
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -25,6 +25,7 @@
                             type="text"
                             id="fname"
                             name="fname"
+                            value="{{ old('fname') }}"
                             placeholder="First Name"
                             required
                         >
@@ -37,6 +38,7 @@
                             type="text"
                             id="lname"
                             name="lname"
+                            value="{{ old('lname') }}"
                             placeholder="Last Name"
                             required
                             required
@@ -52,6 +54,7 @@
                             type="email"
                             id="email"
                             name="email"
+                            value="{{ old('email') }}"
                             placeholder="example@example.com"
                             required
                         >
@@ -64,6 +67,7 @@
                             type="tel"
                             id="phone"
                             name="phone"
+                            value="{{ old('phone') }}"
                             maxlength="10"
                             placeholder="7771237654"
                         >
@@ -90,7 +94,7 @@
                             class="form-control"
                             type="password"
                             id="password-confirm"
-                            name="password-confirm"
+                            name="password_confirm"
                             placeholder="Confirm Password"
                             required
                         >
@@ -105,6 +109,7 @@
                             type="date"
                             id="dob"
                             name="dob"
+                            value="{{ old('dob') }}"
                             required
                         >
                     </div>
@@ -119,7 +124,8 @@
                         >
                             <option value="" disabled hidden selected>Select a Role</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role->role_id }}">
+                                <option value="{{ $role->role_id }}" 
+                                    {{ $role->role_id == old('role_id') ? 'selected' : "" }}>
                                     {{ ucfirst( $role->role_name ) }}
                                 </option>
                             @endforeach
@@ -133,6 +139,15 @@
                         <button type="submit" class="btn btn-primary form-control">Sign in</button>
                     </div>
                 </div>
+                {{-- Validation errors --}}
+                @if ($errors->any())
+                    <ul class="alert alert-danger mt-2" role="alert">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-group-item">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
             </form>
         </div>
     </body>

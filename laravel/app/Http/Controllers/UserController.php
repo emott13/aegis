@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class Users extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,12 +21,12 @@ class Users extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'dob' => 'required',
-            'role_id' => 'required',
+            'fname' => 'required|string|max:50',
+            'lname' => 'required|string|max:50',
+            'email' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'dob' => 'required|string|max:255',
+            'role_id' => 'required|exists:access_roles,role_id',
         ]);
 
         return User::create($request->all());

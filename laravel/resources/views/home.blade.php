@@ -12,7 +12,7 @@
 
         <a id="home-login" class="btn" href="{{ route('login') }}">Login</a>
         <br>
-        <a id="home-register" class="btn" href="{{ route('register') }}">Register</a>
+        <a id="home-register" class="btn" href="{{ route('register.index') }}">Register</a>
     </body>
 @endsection
 </html>
