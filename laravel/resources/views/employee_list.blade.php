@@ -16,7 +16,7 @@
         <tbody>
             @foreach ($employees as $employee)
                 <tr>
-                    <td>{{ $employee->id }}</td>
+                    <td>{{ $employee->emp_id }}</td>
                     <td>{{-- <td>{{ $employee->fname }} {{ $employee->lname }}</td> --}}</td>
                     <td>{{-- access role name --}}</td>
                     <td>{{ $employee->salary }}</td>

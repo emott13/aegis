@@ -22,7 +22,7 @@ class EmployeeSeeder extends Seeder
         {
             DB::table('employees')->insert([
                 'hire_date' => fake()->date(),
-                'salary' => fake()->randomNumber(),
+                'salary' => fake()->randomNumber(6, true),
                 'user_id' => $userId,
             ]);
         }
