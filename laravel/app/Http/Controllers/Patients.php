@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Patient;
 
 class Patients extends Controller
@@ -15,23 +16,29 @@ class Patients extends Controller
         return Patient::all();
     }
 
+    public function patientListPage()
+    {
+        $patients = DB::table('patients')->get();
+        return view('patient_list', ['patients' => $patients]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
-        // 'family_code' => 'required',
-        // 'em_fname' => 'required',
-        // 'em_lname' => 'required',
-        // 'em_phone' => 'required',
-        // 'em_relation' => 'required',
-        // 'admission_date' => 'required',
-        // 'care_group' => 'required',
-        // 'med_morn' => 'required',
-        // 'med_noon' => 'required',
-        // 'med_night' => 'required',
-        // 'bill_amount' => 'required',
+        'family_code' => 'required',
+        'em_fname' => 'required',
+        'em_lname' => 'required',
+        'em_phone' => 'required',
+        'em_relation' => 'required',
+        'admission_date' => 'required',
+        'care_group' => 'required',
+        'med_morn' => 'required',
+        'med_noon' => 'required',
+        'med_night' => 'required',
+        'bill_amount' => 'required',
         'user_id' => 'required'
         ]);
 
@@ -63,4 +70,5 @@ class Patients extends Controller
     {
         return Patient::destroy($id);
     }
+
 }

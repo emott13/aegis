@@ -27,4 +27,5 @@ Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'registerPage'])->name('register');
 // Auth::routes();
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
+Route::get('/patient-list', [Patients::class, 'patientListPage'])->name('patients');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
