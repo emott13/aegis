@@ -16,11 +16,28 @@ class Patients extends Controller
         return Patient::all();
     }
 
+    // public function patientListPage()
+    // {   // needs access roles to determine if user can visit page
+    //     $patients = DB::table('patients')->get(); 
+    //     $users = DB::table('users')->where('user_id', '=', $patients)->get();
+    //     return view('patient_list', ['patients' => $patients,'users' => $users]);
+    // }
+
     public function patientListPage()
-    {   // needs access roles to determine if user can visit page
-        $patients = DB::table('patients')->get();
+    {
+        $patients = DB::table('patients')
+            ->join('users', 'patients.user_id', '=', 'users.user_id')
+            ->select(
+                'patients.*',
+                DB::raw('EXTRACT(YEAR FROM AGE(users.dob)) AS age'),
+                'users.fname',
+                'users.lname'
+            )
+            ->get();
+
         return view('patient_list', ['patients' => $patients]);
     }
+
 
     /**
      * Store a newly created resource in storage.
