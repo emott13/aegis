@@ -4,16 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    {{-- <script src="resources/js/register.js"></script> --}}
-    @push('scripts')
-        <script src="/register.js"></script>
-    @endpush
+    <title>Register</title>
 </head>
 @section('content')
     <body>
-        {{-- <a id="register-home" class="btn" href="{{ route('home') }}">Home</a> --}}
-
         <div class="container">
             <h1 class="text-center">Register</h1> 
             <br>
