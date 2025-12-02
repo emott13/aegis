@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    {{-- <script src="resources/js/register.js"></script> --}}
+    @push('scripts')
+        <script src="/register.js"></script>
+    @endpush
 </head>
 @section('content')
     <body>
@@ -134,7 +138,7 @@
                 </div>
                 <br>
                 <div id="patient-emergency-div" class="row alert alert-warning mx-0">
-                    <h3>Emergency Contact Info</h3>
+                    <h3>Emergency Contact Info <small>(For patients)</small></h3>
                     <div class="form-group col-md-6">
                         <label for="emergency-fname">Emergency Contact First Name</label>
                         <input
@@ -183,7 +187,7 @@
                         <label for="emergency-relation">Emergency Relation</label>
                         <input
                             class="form-control"
-                            type="password"
+                            type="text"
                             id="emergency-relation"
                             name="emergency_relation"
                             placeholder="Ex. Father, Mother, Spouse"
