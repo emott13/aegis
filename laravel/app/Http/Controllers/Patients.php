@@ -49,9 +49,9 @@ class Patients extends Controller
                 break;
 
             case 'admission_date':
-                $query->orderBy('patients.admission');
+                $query->orderBy('patients.admission_date');
                 break;
-                
+
             default:
                 $query->orderBy('patients.patient_id');
         }

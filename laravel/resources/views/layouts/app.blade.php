@@ -22,7 +22,7 @@
 </head>
 <style>
     body{
-        background-image: linear-gradient(#37005bb3, #1c0032b3) !important;
+        background-image: linear-gradient(#37005bb8, #1c0032ee) !important;
     }
 </style>
 <body class="body">
