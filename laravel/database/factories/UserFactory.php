@@ -17,11 +17,6 @@ class UserFactory extends Factory
     protected static ?string $password;
 
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -32,8 +27,22 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'dob' => fake()->date(),
             'phone' => fake()->numerify('##########'),
-            'role_id' => rand(1, 7),
+            'role_id' => rand(2, 6),
             'approved' => fake()->boolean(),
         ];
     }
+    
+    public function employee(): Factory
+    {
+        return $this->afterCreating(function ($user) {
+            // Age restriction: only users >= 18 can become employees
+            if ($user->dob <= now()->subYears(18)) {
+                \App\Models\Employee::factory()->create([
+                    'user_id' => $user->user_id,
+                ]);
+            }
+        });
+    }
+
+
 }

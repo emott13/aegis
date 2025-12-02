@@ -1,37 +1,22 @@
 <?php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class AccessRoleSeeder extends Seeder
 {
-    // [role, access_level]
-    public $roles = [
-        ['admin', 0],
-        ['supervisor', 1],
-        ['doctor', 2],
-        ['caregiver', 4],
-        ['employee', 5],
-        ['patient', 9],
-        ['family', 10],
-    ];
-
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        foreach ($this->roles as $role)
-        {
-            DB::table('access_roles')->insert(
-                [
-                    'role_name' => $role[0],
-                    'access_level' => $role[1],
-                ]
-            );
-        }
+        $roles = [
+            ['role_id' => 1, 'role_name' => "ADMIN", 'access_level' => 1],
+            ['role_id' => 2, 'role_name' => "DOCTOR", 'access_level' => 2],
+            ['role_id' => 3, 'role_name' => "CAREGIVER", 'access_level' => 3],
+            ['role_id' => 4, 'role_name' => "SUPERVISOR", 'access_level' => 4],
+            ['role_id' => 5, 'role_name' => "PATIENT", 'access_level' => 5],
+            ['role_id' => 6, 'role_name' => "FAMILY", 'access_level' => 6],
+        ];
+
+        DB::table('access_roles')->insertOrIgnore($roles);
     }
 }

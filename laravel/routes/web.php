@@ -29,5 +29,7 @@ Route::get('/register', [RegisterController::class, 'registerPage'])->name('regi
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
 // Route::get('/patient-list', [Patients::class, 'patientListPage'])->name('patients');
 Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
-Route::get('/employee-list', [Employees::class, 'employeeListPage'])->name('employees');
+Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
+
+// Route::get('/employee-list', [Employees::class, 'employeeListPage'])->name('employees');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

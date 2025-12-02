@@ -1,57 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
-use App\Models\AccessRole;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class AccessRoles extends Controller
+class AccessRole extends Model
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    use HasFactory;
+
+    protected $table = 'access_roles';
+    protected $primaryKey = 'role_id';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'role_name',
+    ];
+
+    // Relationship: one role has many users
+    public function users()
     {
-        return AccessRole::all();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-        'role_name' => 'required',
-        'access_level' => 'required',
-        ]);
-
-        return AccessRole::create($request->all());
-
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return AccessRole::findOrFail($id);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $user = AccessRole::findOrFail($id);
-        $user -> update($request->all());
-        return $user;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        return AccessRole::destroy($id);
+        return $this->hasMany(User::class, 'role_id', 'role_id');
     }
 }
