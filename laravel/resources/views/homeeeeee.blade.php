@@ -1,4 +1,5 @@
-@extends('master')
+{{-- @extends('master') --}}
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="en">
 <head>

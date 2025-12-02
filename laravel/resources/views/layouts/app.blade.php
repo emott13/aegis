@@ -23,9 +23,10 @@
 <style>
     body{
         background-image: linear-gradient(#37005bb8, #1c0032ee) !important;
+        background-color: #1c0032ee;
     }
 </style>
-<body class="body">
+<body>
     <div id="bckgrnd_overlay app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
