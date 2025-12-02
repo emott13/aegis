@@ -8,41 +8,63 @@ use App\Models\Patient;
 
 class Patients extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // METHODS
+    public function index()                                                     // Display listing of resourse // 
     {
         return Patient::all();
     }
 
-    // public function patientListPage()
-    // {   // needs access roles to determine if user can visit page
-    //     $patients = DB::table('patients')->get(); 
-    //     $users = DB::table('users')->where('user_id', '=', $patients)->get();
-    //     return view('patient_list', ['patients' => $patients,'users' => $users]);
-    // }
-
-    public function patientListPage()
+    public function patientListPage(Request $request)                           // Display Patient List page //
     {
-        $patients = DB::table('patients')
+        $order = $request->input('order', 'patient_id');                        // default sort if none provided
+
+        $query = DB::table('patients')                                          // base query
             ->join('users', 'patients.user_id', '=', 'users.user_id')
             ->select(
                 'patients.*',
                 DB::raw('EXTRACT(YEAR FROM AGE(users.dob)) AS age'),
                 'users.fname',
                 'users.lname'
-            )
-            ->get();
+            );
 
-        return view('patient_list', ['patients' => $patients]);
+        switch ($order) {                                                       // dynamic sorting based on input
+            case 'name':
+                $query->orderBy('users.lname')->orderBy('users.fname');
+                break;
+
+            case 'age':
+                $query->orderBy('age');
+                break;
+
+            case 'em_name':
+                $query->orderBy('patients.em_lname')->orderBy('patients.em_fname');
+                break;
+
+            case 'em_phone':
+                $query->orderBy('patients.em_phone');
+                break;
+
+            case 'em_relation':
+                $query->orderBy('patients.em_relation');
+                break;
+
+            case 'admission_date':
+                $query->orderBy('patients.admission');
+                break;
+                
+            default:
+                $query->orderBy('patients.patient_id');
+        }
+
+        $patients = $query->get();
+
+        return view('patient_list', [                                           // display page
+            'patients' => $patients,
+            'order' => $order
+        ]);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request)                                     // Display newly created resourse //
     {
         $request->validate([
         'family_code' => 'required',
@@ -62,28 +84,19 @@ class Patients extends Controller
         return Patient::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(string $id)                                            // Display specified resourse //
     {
         return Patient::findOrFail($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id)                        // Update specified resourse //
     {
         $user = Patient::findOrFail($id);
         $user -> update($request->all());
         return $user;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(string $id)                                         // Remove specified resourse //
     {
         return Patient::destroy($id);
     }

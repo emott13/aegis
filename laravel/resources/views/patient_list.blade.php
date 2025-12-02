@@ -5,16 +5,17 @@
 
 @if ($patients->count())
     <div style="width: 100%; padding: 0 10vw">
+
         <table class="table table-sm table-striped table-hover table-border">
             <thead>
                 <tr>
-                    <th>Patient ID</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Emergency Name</th>
-                    <th>Emergency Phone</th>
-                    <th>Emergency Relation</th>
-                    <th>Admission Date</th>
+                    <th><a href="{{ route('patient.list', ['order' => 'patient_id']) }}">Patient ID</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'name']) }}">Name</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'age']) }}">Age</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'em_name']) }}">Emergency Name</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'em_ph']) }}">Emergency Phone</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'em_ph']) }}">Emergency Relation</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'em_ph']) }}">Admission Date</a></th>
                 </tr>
             </thead>
             <tbody>
