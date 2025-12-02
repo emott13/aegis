@@ -9,6 +9,10 @@
 
     <title>{{ config('app.name', 'Aegis') }}</title>
 
+    <!-- Favicon -->
+    {{-- <link rel="icon" type="icon/png" href="logo.png"> --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -16,8 +20,13 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-    <div id="app">
+<style>
+    body{
+        background-image: linear-gradient(#37005bb3, #1c0032b3) !important;
+    }
+</style>
+<body class="body">
+    <div id="bckgrnd_overlay app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -75,6 +84,7 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <p><a href="https://www.flaticon.com/free-icons/healthcare" title="healthcare icons">Healthcare icons created by Iconjam - Flaticon</a></p>
     </div>
 </body>
 </html>
