@@ -2,10 +2,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use Auth;
-// use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +27,9 @@ Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appoi
 Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
 Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
 
-// Route::get('/employee-list', [Employees::class, 'employeeListPage'])->name('employees');
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home.index');
+Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
+Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::post('/login', [LoginController::class, 'login'])->name('login.login');
