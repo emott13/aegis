@@ -18,18 +18,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
-Route::get('/register', [RegisterController::class, 'registerPage'])->name('register');
-// Auth::routes();
-Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
-// Route::get('/patient-list', [Patients::class, 'patientListPage'])->name('patients');
-Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
-Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
-
 Route::get('/', [HomeController::class, 'home'])->name('home.index');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::post('/login', [LoginController::class, 'login'])->name('login.login');
+
+Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
+Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
+Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
