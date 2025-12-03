@@ -1,3 +1,12 @@
+<?php
+    function displaySalary($salary){
+        $salary = preg_replace('/[^0-9]/', '', $salary);
+
+        $newFormat = '$' . number_format($salary, 2, '.', ',');
+        return $newFormat;
+    }
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -21,7 +30,7 @@
                             <td>{{ $employee->fname }} {{ $employee->lname }}</td>
                             <td>{{ $employee->age }} years</td>
                             <td>{{ $employee->role_name }}</td>
-                            <td>{{ $employee->salary }}</td>
+                            <td>{{ displaySalary($employee->salary) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

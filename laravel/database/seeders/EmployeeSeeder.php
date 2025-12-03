@@ -33,25 +33,24 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Employee;
 
 class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        // Get users eligible to become employees
         $users = User::query()
-            ->whereHas('AccessRole', function ($q) {
-                $q->whereNotIn('role_name', ['patient', 'family']);
-            })
             ->where('dob', '<=', now()->subYears(18))
-            ->doesntHave('employee')
+            ->whereDoesntHave('accessRoles', function ($q) {
+                $q->where('role_name', 'patient');
+            })
             ->get();
 
         foreach ($users as $user) {
-            // Create employee using factory binding
             $user->employee()->create(
-                \App\Models\Employee::factory()->make()->toArray()
+                Employee::factory()->make()->toArray()
             );
         }
     }
 }
+
