@@ -23,4 +23,5 @@ Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::post('/login', [LoginController::class, 'login'])->name('login.login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -10,12 +10,4 @@ class LoginController extends Controller
     {
         return view('login');
     }
-
-    public function login()
-    {
-        $validated = $request->validate([
-            'email' => 'required|email|max:255',
-            'password' => 'required|string|max:255',
-        ])
-    }
 }
