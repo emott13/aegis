@@ -188,8 +188,8 @@
                         >
                     </div>
                 </div>
-                <br>
                 <h6>Note: Your application will be reviewed before you can login.</h6>
+                <small>Already have an account? <a href={{ route('login') }}>Login</a></small>
                 <div class="row">
                     <div class="form-group col">
                         <button type="submit" class="btn btn-primary form-control">Sign in</button>
