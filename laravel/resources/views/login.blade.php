@@ -42,6 +42,7 @@
                         >
                     </div>
                 </div>
+                <small>Don't have an account? <a href={{ route('register') }}>Register here</a></small>
                 <div class="row mt-3">
                     <div class="form-group col">
                         <button type="submit" class="btn btn-primary form-control">Sign in</button>
