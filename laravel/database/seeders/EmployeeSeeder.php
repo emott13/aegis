@@ -40,10 +40,8 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         $users = User::query()
-            ->where('dob', '<=', now()->subYears(18))
-            ->whereDoesntHave('accessRoles', function ($q) {
-                $q->where('role_name', 'patient');
-            })
+            ->where('dob', '<=', now()->subYears(18), 'and')
+            ->where('role_id','!=', '5') // is not a patient
             ->get();
 
         foreach ($users as $user) {

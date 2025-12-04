@@ -15,7 +15,12 @@ class AccessRole extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'role_name',
+        'role_name' => 'admin',
+        'role_name' => 'doctor',
+        'role_name' => 'supervisor',
+        'role_name' => 'caregiver',
+        'role_name' => 'patient',
+        'role_name' => 'family'
     ];
 
     // Relationship: one role has many users

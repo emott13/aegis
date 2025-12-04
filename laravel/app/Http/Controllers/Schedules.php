@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Schedule;
 
 class Schedules extends Controller
@@ -13,6 +14,28 @@ class Schedules extends Controller
     public function index()
     {
         return Schedule::all();
+    }
+
+    public function scheduleListPage(Request $request)
+    {
+        $order = $request->input('order', 'schedule_date');
+
+        $schedules = Schedule::with([
+            'madeBy.user',
+            'doctor.user',
+            'supervisor.user',
+            'careRed.user',
+            'careBlue.user',
+            'careGreen.user',
+            'careYellow.user'
+        ])
+        ->orderBy($order)
+        ->get();
+
+        return view('schedule', [
+            'schedules' => $schedules,
+            'order' => $order
+        ]);
     }
 
     /**

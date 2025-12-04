@@ -30,4 +30,40 @@ class Schedule extends Model
         'care_green',
         'care_yellow',
     ];
+
+    // Methods
+    public function madeBy()
+    {
+        return $this->belongsTo(Employee::class, 'made_by', 'emp_id')->with('user');
+    }
+
+    public function doctor()
+    {
+        return $this->belongsTo(Employee::class, 'doctor_id', 'emp_id')->with('user');
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo(Employee::class, 'supervisor_id', 'emp_id')->with('user');
+    }
+
+    public function careRed()
+    {
+        return $this->belongsTo(Employee::class, 'care_red', 'emp_id')->with('user');
+    }
+
+    public function careBlue()
+    {
+        return $this->belongsTo(Employee::class, 'care_blue', 'emp_id')->with('user');
+    }
+
+    public function careGreen()
+    {
+        return $this->belongsTo(Employee::class, 'care_green', 'emp_id')->with('user');
+    }
+
+    public function careYellow()
+    {
+        return $this->belongsTo(Employee::class, 'care_yellow', 'emp_id')->with('user');
+    }
 }

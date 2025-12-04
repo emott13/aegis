@@ -9,27 +9,29 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id('schedule_id');
             $table->date('schedule_date');
 
-            $table->bigInteger('made_by')->unsigned();
-            $table->bigInteger('doctor_id')->unsigned();
-            $table->bigInteger('supervisor_id')->unsigned();
-            $table->bigInteger('care_red')->unsigned();
-            $table->bigInteger('care_blue')->unsigned();
-            $table->bigInteger('care_green')->unsigned();
-            $table->bigInteger('care_yellow')->unsigned();
+            // All 7 employee references
+            $table->unsignedBigInteger('made_by');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('supervisor_id');
+            $table->unsignedBigInteger('care_red');
+            $table->unsignedBigInteger('care_blue');
+            $table->unsignedBigInteger('care_green');
+            $table->unsignedBigInteger('care_yellow');
 
-            $table->foreign('made_by')->references('emp_id')->on('employees');
-            $table->foreign('doctor_id')->references('emp_id')->on('employees');
-            $table->foreign('supervisor_id')->references('emp_id')->on('employees');
-            $table->foreign('care_red')->references('emp_id')->on('employees');
-            $table->foreign('care_blue')->references('emp_id')->on('employees');
-            $table->foreign('care_green')->references('emp_id')->on('employees');
-            $table->foreign('care_yellow')->references('emp_id')->on('employees');
+            $table->foreign('made_by')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('supervisor_id')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('care_red')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('care_blue')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('care_green')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('care_yellow')->references('emp_id')->on('employees')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

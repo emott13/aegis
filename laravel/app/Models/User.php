@@ -53,7 +53,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function accessRole()
+    public function accessRoles()
     {
         return $this->hasOne(User::class, 'role_id', 'role_id');
     }
@@ -61,5 +61,10 @@ class User extends Authenticatable
     public function employee()
     {
         return $this->hasOne(User::class, 'user_id', 'user_id');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->fname} {$this->lname}";
     }
 }

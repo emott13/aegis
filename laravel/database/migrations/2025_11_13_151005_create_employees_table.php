@@ -9,15 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id('emp_id');
-            $table->date('hire_date')->nullable();
+            $table->date('hire_date');
             $table->integer('salary')->nullable();
 
-            $table->bigInteger('user_id')->unsigned()->unique();
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('user_id')->on('users')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

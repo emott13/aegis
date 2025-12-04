@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
 Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
 Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
+
+Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');

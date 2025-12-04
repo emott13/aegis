@@ -25,4 +25,16 @@ class Employee extends Model
         'salary',
         'user_id',
     ];
+
+    // Methods
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    // convenience: $employee->full_name
+    public function getFullNameAttribute()
+    {
+        return $this->user->full_name;
+    }
 }
