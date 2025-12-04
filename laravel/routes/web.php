@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'home'])->name('home.index');
+Route::get('/', [HomeController::class, 'home'])->name('home.index')->middleware('auth');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/register-approval', [RegisterController::class, 'approvalPage'])->name('approval')->middleware('auth');
+
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
