@@ -1,54 +1,33 @@
 <?php
-// namespace Database\Seeders;
-
-// use Illuminate\Database\Seeder;
-// use App\Models\User;
-// use App\Models\Employee;
-// use Carbon\Carbon;
-
-// class EmployeeSeeder extends Seeder
-// {
-//     public function run(): void
-//     {
-//         // Get all users that should become employees
-//         $eligibleUsers = User::query()
-//             ->whereHas('AccessRole', function ($q) {
-//                 $q->whereNotIn('role_name', ['patient', 'family']);
-//             })
-//             ->where('dob', '<=', Carbon::now()->subYears(18))
-//             ->doesntHave('employee') // user is not already an employee
-//             ->get();
-
-//         // Create employees for each eligible user
-//         foreach ($eligibleUsers as $user) {
-//             Employee::factory()->create([
-//                 'user_id' => $user->user_id,
-//             ]);
-//         }
-//     }
-// }
-
 
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\AccessRole;
 use App\Models\User;
 use App\Models\Employee;
+use Carbon\Carbon;
 
 class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = User::query()
-            ->where('dob', '<=', now()->subYears(18), 'and')
-            ->where('role_id','!=', '5') // is not a patient
+        $minBirthdate = Carbon::now()->subYears(18)->format('Y-m-d');
+
+        $patientRoleId   =  AccessRole::where('role_name', 'patient')->value('role_id');
+        $familyRoleId    =  AccessRole::where('role_name', 'family')->value('role_id');
+
+        $eligibleUsers = User::where('dob', '<=', $minBirthdate)
+            ->whereNotIn('role_id', [$patientRoleId, $familyRoleId])
+            ->whereDoesntHave('employee')  // not already an employee
             ->get();
 
-        foreach ($users as $user) {
-            $user->employee()->create(
-                Employee::factory()->make()->toArray()
-            );
+        foreach ($eligibleUsers as $user) {
+            Employee::create([
+                'user_id'   => $user->user_id,
+                'hire_date' => now()->subDays(rand(10, 1000)),
+                'salary'    => rand(80000, 220000),
+            ]);
         }
     }
 }
-
