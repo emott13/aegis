@@ -13,10 +13,10 @@
             <br>
 
             {{-- Login Form --}}
-            <form action="{{ route('login.login') }}" method="POST" class="">
+            <form action="{{ route('login') }}" method="POST" class="">
                 @csrf
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group">
                         <label for="email">Email</label>
                         <input
                             class="form-control"
@@ -29,7 +29,7 @@
                         >
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input
                             class="form-control"
@@ -42,6 +42,7 @@
                         >
                     </div>
                 </div>
+                <small>Don't have an account? <a href={{ route('register') }}>Register here</a></small>
                 <div class="row mt-3">
                     <div class="form-group col">
                         <button type="submit" class="btn btn-primary form-control">Sign in</button>
