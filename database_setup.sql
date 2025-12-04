@@ -41,8 +41,9 @@ CREATE TABLE IF NOT EXISTS employees (
     emp_id int PRIMARY KEY AUTO_INCREMENT,
     hire_date date NOT NULL,
     salary int,
-    user_id int NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    user_id 'fk_id' int NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    CHECK (users.dob <= (CURRENT_DATE - INTERVAL '18' YEAR))
 );
 
 CREATE TABLE IF NOT EXISTS cares (
