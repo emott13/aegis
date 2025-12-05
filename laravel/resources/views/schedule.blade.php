@@ -25,7 +25,6 @@
                         <td>{{ $schedule->schedule_date }}</td>
                         <td>{{ $schedule->doctor->user->full_name }}</td>
                         <td>{{ $schedule->supervisor->user->full_name }}</td>
-                        <td>{{ $schedule->madeBy->user->full_name }}</td>
 
                         <td>{{ $schedule->careRed->user->full_name }}</td>
                         <td>{{ $schedule->careBlue->user->full_name }}</td>
