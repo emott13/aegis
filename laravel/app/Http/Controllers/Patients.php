@@ -14,6 +14,26 @@ class Patients extends Controller
         return Patient::all();
     }
 
+    public function home()
+    {
+        $query = DB::table('patients')
+            ->join('users', 'patients.user_id', '=', 'users.user_id')
+            ->join('cares', 'patients.patient_id', '=', 'cares.patient_id')
+            ->select(
+                'patients.patient_id',
+                'patients.family_code',
+                'cares.med_morn',
+                'cares.med_noon',
+                'cares.med_night',
+                'cares.breakfast',
+                'cares.lunch',
+                'cares.dinner'
+            );
+        $patients = $query->get();
+
+        return view('patient_home', ['patients' => $patients]);
+    }
+
     public function patientListPage(Request $request)                           // Display Patient List page //
     {
         $order = $request->input('order', 'patient_id');                        // default sort if none provided

@@ -34,3 +34,4 @@ Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patien
 Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
 
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
+Route::get('/patient', [Patients::class, 'home'])->name('patient');
