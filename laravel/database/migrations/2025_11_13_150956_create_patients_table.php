@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('bill_amount')->default(0);
 
             $table->bigInteger('user_id')->unsigned()->unique();
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

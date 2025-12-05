@@ -18,8 +18,8 @@ return new class extends Migration
             $table->bigInteger('patient_id')->unsigned();
             $table->bigInteger('doctor_id')->unsigned();
             $table->string('doc_comment')->nullable();
-            $table->foreign('patient_id')->references('patient_id')->on('patients');
-            $table->foreign('doctor_id')->references('emp_id')->on('employees');
+            $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('emp_id')->on('employees')->onDelete('cascade');
 
             $table->timestamps();
         });

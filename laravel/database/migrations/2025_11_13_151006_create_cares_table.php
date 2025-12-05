@@ -23,8 +23,8 @@ return new class extends Migration
             
             $table->bigInteger('emp_id')->unsigned();
             $table->bigInteger('patient_id')->unsigned();
-            $table->foreign('emp_id')->references('emp_id')->on('employees');
-            $table->foreign('patient_id')->references('patient_id')->on('patients');
+            $table->foreign('emp_id')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
 
             $table->timestamps();
         });

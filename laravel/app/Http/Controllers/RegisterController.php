@@ -71,4 +71,52 @@ class RegisterController extends Controller
 
         return view('registration_approval', ['unapproved' => $unapproved]);
     }
+
+    public function approval(Request $request)
+    {
+        // yes if the user clicked the "yes" checkbox, no if the user clicked the "no" checkbox
+        $yes = [];
+        $no = [];
+        unset($request['_token']);
+
+        foreach ($request->all() as $key => $val)
+        {
+            $pair = explode('_', $key);
+            // formatted like ["y"\"n", user_id]
+            switch ($pair[0])
+            {
+                case "y":
+                    $yes[] = ["user_id" => $pair[1]];
+                    // formatted like ["user_id": 13]
+                    break;
+                case "n":
+                    $no[] = ["user_id" => $pair[1]];
+                    // formatted like ["user_id": 13]
+                    break;
+            }
+        }
+
+        // print_r($request->all());
+        print_r($yes);
+        print_r($no);
+
+        foreach ($yes as $user_id)
+        {
+            DB::table('users')
+                ->where('approved', false)
+                ->where('user_id', $user_id)
+                ->limit(1)
+                ->update(['approved' => 1]);
+        }
+        foreach ($no as $user_id)
+        {
+            DB::table('users')
+                ->where('approved', false)
+                ->where('user_id', $user_id)
+                ->limit(1)
+                ->delete();
+        }
+
+        return "";
+    }
 }
