@@ -1,11 +1,11 @@
 <?php
-
+// working currently
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 
-class Appointments extends Controller
+class AppointmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -54,4 +54,5 @@ class Appointments extends Controller
     {
         return Appointment::destroy($id);
     }
+
 }

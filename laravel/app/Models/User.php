@@ -52,4 +52,14 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function accessRole()
+    {
+        return $this->hasOne(User::class, 'role_id', 'role_id');
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(User::class, 'user_id', 'user_id');
+    }
 }

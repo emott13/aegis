@@ -15,17 +15,17 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '@vite/client', 'resources/*', '*'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['*', 'GET'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*', 'http://10.222.177.133:8000', 'http://10.222.177.133:5173'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ['*'],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['*'],
 
     'max_age' => 0,
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccessRole;
 use Illuminate\Http\Request;
+use App\Models\Employee;
 use App\Models\User;
 
 class UserController extends Controller
@@ -57,4 +59,15 @@ class UserController extends Controller
     {
         return User::destroy($id);
     }
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'user_id');
+    }
+
+    public function accessRole()
+    {
+        return $this->belongsTo(AccessRole::class, 'role_id');
+    }
+
 }

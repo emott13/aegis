@@ -27,3 +27,7 @@ Route::get('/register-approval', [RegisterController::class, 'approvalPage'])->n
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
+Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
+Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
