@@ -27,7 +27,7 @@ class Employees extends Controller
             ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
             ->select(
                 'employees.*',
-                DB::raw('EXTRACT(YEAR FROM AGE(users.dob)) AS age'),
+                DB::raw('TIMESTAMPDIFF(YEAR, users.dob, CURDATE()) AS age'),
                 'users.fname',
                 'users.lname',
                 'access_roles.role_name'
