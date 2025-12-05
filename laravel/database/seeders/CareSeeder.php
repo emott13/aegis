@@ -24,12 +24,12 @@ class CareSeeder extends Seeder
         for ($i = 0; $i < $min; $i++)
         {
             DB::table('cares')->insert([
-                'med_morn' => fake()->optional(.7)->boolean(),
-                'med_noon' => fake()->optional(.7)->boolean(),
-                'med_night' => fake()->optional(.7)->boolean(),
-                'breakfast' => fake()->optional(.7)->boolean(),
-                'lunch' => fake()->optional(.7)->boolean(),
-                'dinner' => fake()->optional(.7)->boolean(),
+                'med_morn' => fake()->optional(.9)->boolean(),
+                'med_noon' => fake()->optional(.9)->boolean(),
+                'med_night' => fake()->optional(.9)->boolean(),
+                'breakfast' => fake()->optional(.9)->boolean(),
+                'lunch' => fake()->optional(.9)->boolean(),
+                'dinner' => fake()->optional(.9)->boolean(),
 
                 'care_date' => fake()->date(),
                 'patient_id' => $patientIds[$i],
