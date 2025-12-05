@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UserController;
 function formatPhoneNumber($phoneNumber) {
 
     $phoneNumber = preg_replace('/[^0-9]/', '', $phoneNumber);
@@ -40,7 +40,7 @@ function formatPhoneNumber($phoneNumber) {
                     <tr>
                         <td>{{ $patient->patient_id }}</td>
                         <td>{{ $patient->fname }} {{ $patient->lname }}</td> 
-                        <td>{{ $patient->age }} years</td>
+                        <td>{{ UserController::age($patient->dob) }} years</td>
                         <td>{{ $patient->em_fname }} {{ $patient->em_lname }}</td>
                         <td>{{ formatPhoneNumber($patient->em_phone) }}</td>
                         <td>{{ $patient->em_relation }}</td>

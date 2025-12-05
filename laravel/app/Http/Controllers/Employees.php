@@ -27,11 +27,11 @@ class Employees extends Controller
             ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
             ->select(
                 'employees.*',
-                DB::raw('EXTRACT(YEAR FROM AGE(users.dob)) AS age'),
+                'users.dob',
                 'users.fname',
                 'users.lname',
                 'access_roles.role_name'
-            );
+        );
 
         switch ($order) {                                                       // dynamic sorting based on input
             case 'name':
@@ -64,7 +64,7 @@ class Employees extends Controller
 
         return view('employee_list', [                                           // display page
             'employees' => $employees,
-            'order' => $order
+            'order' => $order,
         ]);
     }
 

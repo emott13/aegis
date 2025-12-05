@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Users;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Patients;
 use App\Http\Controllers\AccessRoles;
 use App\Http\Controllers\Employees;
@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('users', Users::class);
+Route::resource('users', UserController::class);
 Route::resource('patients', Patients::class);
 Route::resource('access_roles', AccessRoles::class);
 Route::resource('employees', Employees::class);

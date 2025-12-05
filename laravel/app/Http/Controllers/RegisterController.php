@@ -61,4 +61,14 @@ class RegisterController extends Controller
 
         return redirect()->route('home.index');
     }
+
+    public function approvalPage(Request $request)
+    {
+        // $unapproved = DB::table('users')->where('approved', '0')->get();
+        $unapproved = User::query()
+            ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
+            ->where('approved', 0)->get(['user_id', 'fname', 'lname', 'role_name']);
+
+        return view('registration_approval', ['unapproved' => $unapproved]);
+    }
 }
