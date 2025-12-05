@@ -22,7 +22,8 @@ class Patients extends Controller
             ->join('users', 'patients.user_id', '=', 'users.user_id')
             ->select(
                 'patients.*',
-                DB::raw('TIMESTAMPDIFF(YEAR, users.dob, CURDATE()) AS age'),
+                'users.dob',
+                // DB::raw('TIMESTAMPDIFF(YEAR, users.dob, CURDATE()) AS age'),
                 'users.fname',
                 'users.lname'
             );

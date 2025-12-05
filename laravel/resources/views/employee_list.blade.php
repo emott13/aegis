@@ -1,4 +1,5 @@
 <?php
+    use App\Http\Controllers\UserController;
     function displaySalary($salary){
         $salary = preg_replace('/[^0-9]/', '', $salary);
 
@@ -28,7 +29,7 @@
                         <tr>
                             <td>{{ $employee->emp_id }}</td>
                             <td>{{ $employee->fname }} {{ $employee->lname }}</td>
-                            <td>{{ $employee->age }} years</td>
+                            <td>{{ UserController::age($employee->dob) }} years</td>
                             <td>{{ $employee->role_name }}</td>
                             <td>{{ displaySalary($employee->salary) }}</td>
                         </tr>

@@ -6,6 +6,7 @@ use App\Models\AccessRole;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -15,6 +16,14 @@ class UserController extends Controller
     public function index()
     {
         return User::all();
+    }
+
+    /**
+     * Gets the age based off a date of birth
+     */
+    static function age($dob)
+    {
+        return Carbon::parse($dob)->age;
     }
 
     /**
