@@ -7,6 +7,7 @@ use App\Models\AccessRole;
 use App\Models\User;
 use App\Models\Patient;
 use App\Models\Employee;
+use Auth;
 use DB;
 
 class RegisterController extends Controller
@@ -64,7 +65,10 @@ class RegisterController extends Controller
 
     public function approvalPage(Request $request)
     {
-        // $unapproved = DB::table('users')->where('approved', '0')->get();
+        $roleName = Auth::user()->getRoleName();
+        if ( !in_array($roleName, ['admin', 'supervisor']) )
+            return redirect('login');
+
         $unapproved = User::query()
             ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
             ->where('approved', 0)->get(['user_id', 'fname', 'lname', 'role_name']);
@@ -74,6 +78,9 @@ class RegisterController extends Controller
 
     public function approval(Request $request)
     {
+        $roleName = Auth::user()->getRoleName();
+        if ( !in_array($roleName, ['admin', 'supervisor']) )
+            return redirect('login');
         // yes if the user clicked the "yes" checkbox, no if the user clicked the "no" checkbox
         $yes = [];
         $no = [];
@@ -96,10 +103,6 @@ class RegisterController extends Controller
             }
         }
 
-        // print_r($request->all());
-        print_r($yes);
-        print_r($no);
-
         foreach ($yes as $user_id)
         {
             DB::table('users')
@@ -117,6 +120,6 @@ class RegisterController extends Controller
                 ->delete();
         }
 
-        return "";
+        return $this->approvalPage($request);
     }
 }

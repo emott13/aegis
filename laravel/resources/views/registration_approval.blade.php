@@ -19,7 +19,11 @@
     
     <form class="container" action="{{ route('approval') }}" method="POST">
         @csrf
-        <input class="col" type="submit" value="Submit">
+            <div class="row mt-3">
+                <div class="form-group col">
+                    <button type="submit" class="btn btn-primary form-control">Update Users</button>
+                </div>
+            </div>
         <table class="table">
             <thead>
                 <tr>

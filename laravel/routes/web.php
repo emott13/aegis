@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use Illuminate\Support\Facades\Route;
+use Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,7 @@ Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patien
 Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
 
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
+
+Route::get('/test', function () {
+    return Auth::user()->getAccessLevel();
+})->name('test')->middleware('auth');
