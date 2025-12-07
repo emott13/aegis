@@ -7,6 +7,7 @@ use App\Models\AccessRole;
 use App\Models\User;
 use App\Models\Patient;
 use App\Models\Employee;
+use Auth;
 use DB;
 
 class RegisterController extends Controller
@@ -64,11 +65,61 @@ class RegisterController extends Controller
 
     public function approvalPage(Request $request)
     {
-        // $unapproved = DB::table('users')->where('approved', '0')->get();
+        $roleName = Auth::user()->getRoleName();
+        if ( !in_array($roleName, ['admin', 'supervisor']) )
+            return redirect('login');
+
         $unapproved = User::query()
             ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
             ->where('approved', 0)->get(['user_id', 'fname', 'lname', 'role_name']);
 
         return view('registration_approval', ['unapproved' => $unapproved]);
+    }
+
+    public function approval(Request $request)
+    {
+        $roleName = Auth::user()->getRoleName();
+        if ( !in_array($roleName, ['admin', 'supervisor']) )
+            return redirect('login');
+        // yes if the user clicked the "yes" checkbox, no if the user clicked the "no" checkbox
+        $yes = [];
+        $no = [];
+        unset($request['_token']);
+
+        foreach ($request->all() as $key => $val)
+        {
+            $pair = explode('_', $key);
+            // formatted like ["y"\"n", user_id]
+            switch ($pair[0])
+            {
+                case "y":
+                    $yes[] = ["user_id" => $pair[1]];
+                    // formatted like ["user_id": 13]
+                    break;
+                case "n":
+                    $no[] = ["user_id" => $pair[1]];
+                    // formatted like ["user_id": 13]
+                    break;
+            }
+        }
+
+        foreach ($yes as $user_id)
+        {
+            DB::table('users')
+                ->where('approved', false)
+                ->where('user_id', $user_id)
+                ->limit(1)
+                ->update(['approved' => 1]);
+        }
+        foreach ($no as $user_id)
+        {
+            DB::table('users')
+                ->where('approved', false)
+                ->where('user_id', $user_id)
+                ->limit(1)
+                ->delete();
+        }
+
+        return $this->approvalPage($request);
     }
 }

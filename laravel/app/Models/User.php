@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\AccessRoles;
 
 class User extends Authenticatable
 {
@@ -66,5 +67,15 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return "{$this->fname} {$this->lname}";
+    }
+
+    public function getRoleName()
+    {
+        return AccessRole::where('role_id', $this->role_id)->get('role_name')[0]['role_name'];
+    }
+
+    public function getAccessLevel()
+    {
+        return AccessRole::where('role_id', $this->role_id)->get('access_level')[0]['access_level'];
     }
 }

@@ -7,18 +7,23 @@
     <title>Register Approval</title>
     {{-- temp styles. Should go in file --}}
     <style>
-        .row > * {
-            background-color: lightgray;
-            border: 1px solid black;
+        h1 {
+            /* color: white; */
         }
     </style>
 </head>
 @section('content')
 <body>
-    <h1 class="text-center">Registration Approval</h1>
+    <h1 class="text-center" style="color: white">Registration Approval</h1>
+        
     
-    <form class="container">
-        <input class="col" type="submit" value="Submit">
+    <form class="container" action="{{ route('approval') }}" method="POST">
+        @csrf
+            <div class="row mt-3">
+                <div class="form-group col">
+                    <button type="submit" class="btn btn-primary form-control">Update Users</button>
+                </div>
+            </div>
         <table class="table">
             <thead>
                 <tr>
@@ -34,11 +39,11 @@
                         <th scope="col">{{ $user['lname'] }}</th>
                         <th scope="col">{{ ucwords($user['role_name']) }}</th>
                         <th scope="col">
-                            <input type="checkbox" 
-                                name="yes_{{ $user['user_id'] }}"
+                            <input type="checkbox" autocomplete="off"
+                                name="y_{{ $user['user_id'] }}"
                             >Yes</input>
-                            <input type="checkbox" 
-                                name="no_{{ $user['user_id'] }}"
+                            <input type="checkbox" autocomplete="off"
+                                name="n_{{ $user['user_id'] }}"
                             >No</input>
                         </th>
                     </tr>

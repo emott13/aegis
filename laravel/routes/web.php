@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use Illuminate\Support\Facades\Route;
+use Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('/register-approval', [RegisterController::class, 'approvalPage'])->n
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/register-approval', [RegisterController::class, 'approval'])->name('approval')->middleware('auth');
 
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
 Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
@@ -35,3 +37,7 @@ Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('emp
 
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
 Route::get('/patient', [Patients::class, 'home'])->name('patient');
+
+Route::get('/test', function () {
+    return Auth::user()->getAccessLevel();
+})->name('test')->middleware('auth');
