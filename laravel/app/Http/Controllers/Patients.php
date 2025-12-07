@@ -9,7 +9,7 @@ use App\Models\Patient;
 class Patients extends Controller
 {
     // METHODS
-    public function index()                                                     // Display listing of resourse // 
+    public function index()                                                     // Display listing of resource // 
     {
         return Patient::all();
     }
