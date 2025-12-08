@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AccessRole;
 
-class AccessRoles extends Controller
+class AccessRolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -54,9 +54,9 @@ class AccessRoles extends Controller
         return AccessRole::destroy($id);
     }
 
-    // Relationship: one role has many users
-    public function users()
-    {
-        return $this->hasMany(User::class, 'role_id', 'role_id');
-    }
+    // // Relationship: one role has many users
+    // public function users()
+    // {
+    //     return $this->hasMany(User::class, 'role_id', 'role_id');
+    // }
 }

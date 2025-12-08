@@ -53,7 +53,7 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-
+    // relational functions
     public function patient()
     {
         return $this->hasOne(Patient::class, 'user_id', 'user_id');
@@ -67,7 +67,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(User::class, 'user_id', 'user_id');
     }
-
+    // getter functions
     public function getFullNameAttribute()
     {
         return "{$this->fname} {$this->lname}";
