@@ -91,7 +91,7 @@
                                 placeholder="Password"
                                 required
                             >
-                            <small id="password-help" class="form-text text-muted">We'll never share your password with anyone.</small>
+                            <small id="password-help" class="form-text text-white">We'll never share your password with anyone.</small>
                         </div>
 
                         <div class="form-group col-md-6">
