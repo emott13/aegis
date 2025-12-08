@@ -31,4 +31,14 @@ class Care extends Model
         'emp_id',
         'patient_id',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'emp_id', 'emp_id');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'patient_id', 'patient_id');
+    }
 }

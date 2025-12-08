@@ -54,6 +54,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function patient()
+    {
+        return $this->hasOne(Patient::class, 'user_id', 'user_id');
+    }
     public function accessRoles()
     {
         return $this->hasOne(User::class, 'role_id', 'role_id');
