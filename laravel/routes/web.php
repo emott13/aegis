@@ -34,7 +34,7 @@ Route::post('/register-approval', [RegisterController::class, 'approval'])->name
 
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
 Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list');
-Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
+Route::get('/employees/list', [EmployeesController::class, 'employeeListPage'])->name('employee.list');
 
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
 Route::get('/patient/home', [Patients::class, 'home'])->name('patient.home');

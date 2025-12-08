@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Patients;
 // use App\Http\Controllers\AccessRolesController;
 use App\Http\Controllers\AccessRolesController;
-use App\Http\Controllers\Employees;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\Schedules;
 use App\Http\Controllers\CaresController;
 // use App\Http\Controllers\Appointments;
@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('users', UserController::class);
 Route::resource('patients', Patients::class);
 Route::resource('access_roles', AccessRolesController::class);
-Route::resource('employees', Employees::class);
+Route::resource('employees', EmployeesController::class);
 Route::resource('schedules', Schedules::class);
 Route::resource('cares', CaresController::class);
 Route::resource('appointments', AppointmentsController::class);
