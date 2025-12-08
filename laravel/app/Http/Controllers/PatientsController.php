@@ -8,7 +8,7 @@ use App\Models\Patient;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class Patients extends Controller
+class PatientsController extends Controller
 {
     // METHODS
     public function index()                                                     // Display listing of resource // 
