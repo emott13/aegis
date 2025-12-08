@@ -8,7 +8,7 @@ use App\Http\Controllers\Patients;
 use App\Http\Controllers\AccessRolesController;
 use App\Http\Controllers\Employees;
 use App\Http\Controllers\Schedules;
-use App\Http\Controllers\Cares;
+use App\Http\Controllers\CaresController;
 // use App\Http\Controllers\Appointments;
 use App\Http\Controllers\AppointmentsController;
 
@@ -32,5 +32,5 @@ Route::resource('patients', Patients::class);
 Route::resource('access_roles', AccessRolesController::class);
 Route::resource('employees', Employees::class);
 Route::resource('schedules', Schedules::class);
-Route::resource('cares', Cares::class);
+Route::resource('cares', CaresController::class);
 Route::resource('appointments', AppointmentsController::class);
