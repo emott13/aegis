@@ -25,7 +25,6 @@ Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::get('/register-approval', [RegisterController::class, 'approvalPage'])->name('approval')->middleware('auth');
 
-
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
