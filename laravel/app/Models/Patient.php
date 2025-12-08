@@ -34,4 +34,19 @@ class Patient extends Model
         'bill_amount',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    public function cares()
+    {
+        return $this->hasMany(Care::class, 'patient_id', 'patient_id');
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, 'patient_id', 'patient_id');
+    }
 }

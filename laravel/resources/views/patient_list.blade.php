@@ -40,6 +40,7 @@ function formatPhoneNumber($phoneNumber) {
                     <tr>
                         <td>{{ $patient->patient_id }}</td>
                         <td>{{ $patient->fname }} {{ $patient->lname }}</td> 
+                        {{-- <td>{{ $patient->email }}</td> --}}
                         <td>{{ UserController::age($patient->dob) }} years</td>
                         <td>{{ $patient->em_fname }} {{ $patient->em_lname }}</td>
                         <td>{{ formatPhoneNumber($patient->em_phone) }}</td>

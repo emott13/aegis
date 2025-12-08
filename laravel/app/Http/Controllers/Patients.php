@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Patient;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Patients extends Controller
 {
@@ -14,24 +16,32 @@ class Patients extends Controller
         return Patient::all();
     }
 
-    public function home()
+    public function home(Request $request)                                      // Function for Patient Home Page //
     {
-        $query = DB::table('patients')
-            ->join('users', 'patients.user_id', '=', 'users.user_id')
-            ->join('cares', 'patients.patient_id', '=', 'cares.patient_id')
-            ->select(
-                'patients.patient_id',
-                'patients.family_code',
-                'cares.med_morn',
-                'cares.med_noon',
-                'cares.med_night',
-                'cares.breakfast',
-                'cares.lunch',
-                'cares.dinner'
-            );
-        $patients = $query->get();
+        $user = Auth::user();                                                   // authenticate current user
+        $date = $request->input('date', now()->toDateString());                 // default to current date
+        $patient = $user->patient;                                              // ensure user is patient
 
-        return view('patient_home', ['patients' => $patients]);
+        if (!$patient){                                                         // redirect if user is not patient
+            return view('home');
+        }
+
+        $careRecord = $patient->cares()                                         // retrieve care record
+            ->where('care_date', $date)
+            ->with('employee.user')                                             // caregiver + caregiver name
+            ->first();
+
+        $appointment = $patient->appointments()                                 // retrieve appt info
+            ->where('appt_date', $date)
+            ->with(['doctor.user'])                                             // doctor + doctor name
+            ->first();
+
+        return view('patient_home', [                                           // display page
+            'patient' => $patient,
+            'careRecord' => $careRecord,
+            'appointment' => $appointment,
+            'selectedDate' => $date
+        ]);
     }
 
     public function patientListPage(Request $request)                           // Display Patient List page //
@@ -43,7 +53,7 @@ class Patients extends Controller
             ->select(
                 'patients.*',
                 'users.dob',
-                // DB::raw('TIMESTAMPDIFF(YEAR, users.dob, CURDATE()) AS age'),
+                'users.email',
                 'users.fname',
                 'users.lname'
             );
@@ -85,7 +95,7 @@ class Patients extends Controller
         ]);
     }
 
-    public function store(Request $request)                                     // Display newly created resourse //
+    public function store(Request $request)                                     // Display newly created resource //
     {
         $request->validate([
         'family_code' => 'required',
