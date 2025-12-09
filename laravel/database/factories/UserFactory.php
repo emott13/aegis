@@ -2,21 +2,16 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
+    // variables
+    protected static ?string $password;                             // current factory password
 
-
+    // methods
     public function definition(): array
     {
         return [
@@ -27,22 +22,33 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'dob' => fake()->date(),
             'phone' => fake()->numerify('##########'),
-            'role_id' => rand(2, 6),
             'approved' => fake()->boolean(),
+            'role_id' => fake()->numberBetween(1, 6),
         ];
     }
-    
-    public function employee(): Factory
+
+    public function configure()
     {
         return $this->afterCreating(function ($user) {
-            // Age restriction: only users >= 18 can become employees
-            if ($user->dob <= now()->subYears(18)) {
-                \App\Models\Employee::factory()->create([
+
+            $role = $user->role->role_name;                                         // retreive user role
+
+            if (in_array($role, ['supervisor', 'doctor', 'caregiver'])) {           // if employee type
+                if ($user->dob <= now()->subYears(rand(18, 64))) {                      // set age between 18-64
+                    \App\Models\Employee::factory()->create([
+                        'user_id' => $user->user_id,
+                    ]);
+                }
+            }
+
+            if ($role === 'patient') {                                              // if patient type
+                \App\Models\Patient::factory()->create([                            
                     'user_id' => $user->user_id,
                 ]);
             }
+
         });
     }
-
-
 }
+
+?>
