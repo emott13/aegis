@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Rules\ValidateScheduleAssignments;
 use App\Models\Schedule;
 
 class Schedules extends Controller
@@ -43,18 +43,21 @@ class Schedules extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-        'schedule_date' => 'required',
-        'made_by' => 'required',
-        'doctor_id' => 'required',
-        'supervisor_id' => 'required',
-        'care_red' => 'required',
-        'care_blue' => 'required',
-        'care_green' => 'required',
-        'care_yellow' => 'required',
+        $validated = $request->validate([
+            '*' => [new ValidateScheduleAssignments],  // full schedule validation
+            'schedule_date' => ['required', 'date'],
+            'made_by' => ['required', 'exists:employees,emp_id'],
+            'doctor_id' => ['required', 'exists:employees,emp_id'],
+            'supervisor_id' => ['required', 'exists:employees,emp_id'],
+            'care_red' => ['required', 'exists:employees,emp_id'],
+            'care_blue' => ['required', 'exists:employees,emp_id'],
+            'care_green' => ['required', 'exists:employees,emp_id'],
+            'care_yellow' => ['required', 'exists:employees,emp_id'],
         ]);
 
-        return Schedule::create($request->all());
+        Schedule::create($validated);
+
+        return back()->with('success', 'Schedule saved successfully!');
     }
 
     /**
