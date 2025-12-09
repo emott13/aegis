@@ -20,9 +20,8 @@ class Doctors extends Controller
         $doctor = $user->employee;
 
         if ($user->getRoleName() != 'doctor'){
-            return redirect('home');
+            return redirect()->route('home.index');
         }
-
 
         $today = now()->toDateString();
         // $today = now();

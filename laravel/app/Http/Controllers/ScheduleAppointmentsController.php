@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use Auth;
 
 class ScheduleAppointmentsController extends Controller
 {
@@ -58,6 +59,9 @@ class ScheduleAppointmentsController extends Controller
     // Return view
     public function appointmentPage()
     {
+        if (!in_array(Auth::user()->getRoleName(), ['admin', 'supervisor']))
+            return redirect()->route('home.index');
+
         // $access_roles = DB::table('access_roles')->get();
         return view('doctor_appointment');
     }
