@@ -3,6 +3,9 @@
 @section('content')
     <h1 class="container text-center fw-bold">Doctor Home</h1>
 
+{{-- LINKS --}}
+<a href="{{ route('patient.list') }}" class="btn btn-light fw-bold mb-3">Patient List</a>
+
 {{-- PAST APPOINTMENTS --}}
 @if (count($appointmentsPast))
     <table class="table table-sm table-striped table-hover table-border">

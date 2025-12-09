@@ -17,10 +17,6 @@ use Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -38,7 +34,3 @@ Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('emp
 
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
 Route::get('/patient/home', [Patients::class, 'home'])->name('patient.home');
-
-Route::get('/test', function () {
-    return Auth::user()->getAccessLevel();
-})->name('test')->middleware('auth');

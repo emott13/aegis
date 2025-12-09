@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -19,10 +20,21 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
+        if (Auth::check())
+        {
+            switch (Auth::user()->getRoleName())
+            {
+                case 'patient':
+                    return redirect()->route('patient.home');
+                case 'doctor':
+                    return redirect()->route('doctor.home');
+                default:
+                    break;
+            }
+        }
         return view('home');
     }
 }
