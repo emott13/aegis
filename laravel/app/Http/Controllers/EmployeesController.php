@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Employee;
 
-class Employees extends Controller
+class EmployeesController extends Controller
 {
     // METHODS
     public function index()                                                     // Display listing of resourse // 
@@ -15,7 +15,7 @@ class Employees extends Controller
     }
     public function user()
     {
-        return $this->belongsTo(Users::class, 'user_id');
+        return $this->belongsTo(UserController::class, 'user_id');
     }
 
     public function employeeListPage(Request $request)                           // Display Employee List page //

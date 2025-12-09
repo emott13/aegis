@@ -29,8 +29,8 @@ Route::post('/register-approval', [RegisterController::class, 'approval'])->name
 
 Route::get('/doctor/home', [Doctors::class, 'home'])->name('doctor.home')->middleware('auth');
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
-Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list')->middleware('auth');
-Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
+Route::get('/patients/list', [PatientsController::class, 'patientListPage'])->name('patient.list');
+Route::get('/employees/list', [EmployeesController::class, 'employeeListPage'])->name('employee.list');
 
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
-Route::get('/patient/home', [Patients::class, 'home'])->name('patient.home');
+Route::get('/patient/home', [PatientsController::class, 'home'])->name('patient.home');
