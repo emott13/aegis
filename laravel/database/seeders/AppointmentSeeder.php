@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class AppointmentSeeder extends Seeder
 {
@@ -23,12 +24,24 @@ class AppointmentSeeder extends Seeder
         $min = min(count($patientIds), count($doctorIds));
         for ($i = 0; $i < $min; $i++)
         {
-            DB::table('appointments')->insert([
-                'appt_date' => fake()->date(),
-                'patient_id' => $patientIds[$i],
-                'doctor_id' => $doctorIds[$i],
-                'doc_comment' => fake()->text(),
-            ]);
+            if ($i % 2 === 0)                                                               // if-else to ensure generation of
+            {                                                                               // both past and future appointments
+                DB::table('appointments')->insert([
+                    'appt_date' => fake()->dateTimeBetween('now', '+1 month'),              // future dates
+                    'patient_id' => $patientIds[$i],
+                    'doctor_id' => $doctorIds[$i],
+                    'doc_comment' => fake()->text(),
+                ]);
+            }
+            else
+            {
+                DB::table('appointments')->insert([
+                    'appt_date' => fake()->dateTimeBetween('-1 month', 'now'),              // past dates
+                    'patient_id' => $patientIds[$i],
+                    'doctor_id' => $doctorIds[$i],
+                    'doc_comment' => fake()->text(),
+                ]);
+            }
         }
     }
 }
