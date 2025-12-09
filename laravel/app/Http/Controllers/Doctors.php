@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Appointment;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class Doctors extends Controller
 {
@@ -14,20 +15,28 @@ class Doctors extends Controller
     public function home(Request $request) 
     {
         $user = Auth::user();
-        $date = $request->input('date', now()->toDateString());
+        // Carbon instance is to allow date functions to run (like toDateString())
+        $date = Carbon::parse($request->input('date', today()->addYear()))->addDay()->addSeconds(-1);
         $doctor = $user->employee;
 
         if ($user->getRoleName() != 'doctor'){
             return redirect('home');
         }
 
-        $appointments = Appointment::all()->sortBy('appt_date');
 
+        $today = now()->toDateString();
+        // $today = now();
+        $appointmentsPast = Appointment::all()->where('appt_date', '<', $today)
+            ->where('doctor_id', '=', $doctor->emp_id)->sortBy('appt_date');
+        $appointmentsFuture = Appointment::all()->where('appt_date', '>=', $today)
+            ->where('appt_date', '<', $date)
+            ->where('doctor_id', '=', $doctor->emp_id)->sortBy('appt_date');
 
         return view('doctor_home', [ 
             'doctor' => $doctor,
-            'appointments' => $appointments,
-            'selectedDate' => $date
+            'appointmentsPast' => $appointmentsPast,
+            'appointmentsFuture' => $appointmentsFuture,
+            'selectedDate' => $date->toDateString()
         ]);
     }
 }
