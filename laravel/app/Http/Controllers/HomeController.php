@@ -35,6 +35,7 @@ class HomeController extends Controller
                     break;
             }
         }
+
         return view('home');
     }
 }

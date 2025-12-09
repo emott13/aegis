@@ -46,6 +46,9 @@ class Patients extends Controller
 
     public function patientListPage(Request $request)                           // Display Patient List page //
     {
+        if (!in_array(Auth::user()->getRoleName(), ['admin', 'supervisor', 'doctor', 'caregiver']))
+            return redirect('login');
+
         $order = $request->input('order', 'patient_id');                        // default sort if none provided
 
         $query = DB::table('patients')                                          // base query
