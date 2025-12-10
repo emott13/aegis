@@ -29,7 +29,7 @@ class Schedules extends Controller
             'careGreen.user',
             'careYellow.user'
         ])
-        ->orderBy($order)
+        ->orderByDesc($order)
         ->get();
 
         return view('schedule', [
