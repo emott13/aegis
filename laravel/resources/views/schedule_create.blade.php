@@ -1,4 +1,3 @@
-{{-- @extends('layouts/app') --}}
 @extends('layouts.app')
 <!DOCTYPE html>
 <html lang="en">
@@ -159,7 +158,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="form-group col">
-                        <button type="submit" class="btn btn-primary form-control">Sign in</button>
+                        <button type="submit" class="btn btn-primary form-control">Create</button>
                     </div>
                 </div>
                 {{-- Validation errors --}}
