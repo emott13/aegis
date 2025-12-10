@@ -7,7 +7,7 @@
     <title>Home</title>
 </head>
 @section('content')
-<div class="container" data-bs-theme="dark">
+{{-- <div class="container" data-bs-theme="dark">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -25,9 +25,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="container mt-2 alert" style="background-color: #333; border: 1px solid #454545">
+    @if (in_array($role, ['admin', 'supervisor']))
+        <a href="{{ route('schedules.create') }}" class="btn btn-primary fw-bold mb-3">Create Schedule</a>
+    @endif
+    
     <a href="{{ route('schedules.list') }}" class="btn btn-primary fw-bold mb-3">View Schedule</a>
+
     @if (in_array($role, ['admin', 'supervisor']))
         <a href="{{ route('appointments') }}" class="btn btn-primary fw-bold mb-3">Create Appointment</a>
     @endif

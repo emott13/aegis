@@ -16,8 +16,14 @@
 @section('content')
     <body>
         <div class="container">
-            <h1 class="text-center">Register</h1> 
-            <br>
+            <h1 class="text-center mb-3">Create Schedule</h1> 
+
+            {{-- Success Message --}}
+            @if (session('success'))
+                <div id="success" class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             {{-- New Roster/Schedule Form --}}
             <form action="{{ route('schedules.create') }}" method="POST" class="">
@@ -25,13 +31,13 @@
                 <div class="main-form">
                     <div class="row mb-3">
                         <div class="form-group col-md-6">
-                            <label for="date">Date</label>
+                            <label for="schedule_date">Date</label>
                             <input
                                 class="form-control"
                                 type="date"
-                                id="date"
-                                name="date"
-                                value="{{ old('date') }}"
+                                id="schedule_date"
+                                name="schedule_date"
+                                value="{{ old('schedule_date') }}"
                                 required
                             >
                         </div>
@@ -48,8 +54,8 @@
                             >
                                 <option value="" disabled hidden selected>Select a doctor</option>
                                 @foreach ($doctors as $doctor)
-                                    <option value="{{ $doctor->user_id }}" 
-                                        {{ $doctor->user_id == old('doctor_id') ? 'selected' : "" }}>
+                                    <option value="{{ $doctor->emp_id }}" 
+                                        {{ $doctor->emp_id == old('doctor_id') ? 'selected' : "" }}>
                                         {{ ucfirst( $doctor->getFullNameAttribute() ) }}
                                     </option>
                                 @endforeach
@@ -66,8 +72,8 @@
                             >
                                 <option value="" disabled hidden selected>Select a supervisor</option>
                                 @foreach ($supervisors as $supervisor)
-                                    <option value="{{ $supervisor->user_id }}" 
-                                        {{ $supervisor->user_id == old('supervisor_id') ? 'selected' : "" }}>
+                                    <option value="{{ $supervisor->emp_id }}" 
+                                        {{ $supervisor->emp_id == old('supervisor_id') ? 'selected' : "" }}>
                                         {{ ucfirst( $supervisor->getFullNameAttribute() ) }}
                                     </option>
                                 @endforeach
@@ -77,17 +83,17 @@
 
                     <div class="row mb-3">
                         <div class="form-group col-md-6">
-                            <label for="caregiver_red_id">Caregiver Red</label>
+                            <label for="care_red">Caregiver Red</label>
                             <select
                                 class="form-control"
-                                id="caregiver_red_id"
-                                name="caregiver_red_id"
+                                id="care_red"
+                                name="care_red"
                                 required
                             >
                                 <option value="" disabled hidden selected>Select a caregiver</option>
                                 @foreach ($caregivers as $caregiver)
-                                    <option value="{{ $caregiver->user_id }}" 
-                                        {{ $caregiver->user_id == old('caregiver_id') ? 'selected' : "" }}>
+                                    <option value="{{ $caregiver->emp_id }}" 
+                                        {{ $caregiver->emp_id == old('care_red') ? 'selected' : "" }}>
                                         {{ ucfirst( $caregiver->getFullNameAttribute() ) }}
                                     </option>
                                 @endforeach
@@ -95,17 +101,17 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="caregiver_yellow_id">Caregiver Yellow</label>
+                            <label for="care_yellow">Caregiver Yellow</label>
                             <select
                                 class="form-control"
-                                id="caregiver_yellow_id"
-                                name="caregiver_yellow_id"
+                                id="care_yellow"
+                                name="care_yellow"
                                 required
                             >
                                 <option value="" disabled hidden selected>Select a caregiver</option>
                                 @foreach ($caregivers as $caregiver)
-                                    <option value="{{ $caregiver->user_id }}" 
-                                        {{ $caregiver->user_id == old('caregiver_id') ? 'selected' : "" }}>
+                                    <option value="{{ $caregiver->emp_id }}" 
+                                        {{ $caregiver->emp_id == old('care_yellow') ? 'selected' : "" }}>
                                         {{ ucfirst( $caregiver->getFullNameAttribute() ) }}
                                     </option>
                                 @endforeach
@@ -115,17 +121,17 @@
 
                     <div class="row mb-3">
                         <div class="form-group col-md-6">
-                            <label for="caregiver_green_id">Caregiver Green</label>
+                            <label for="care_green">Caregiver Green</label>
                             <select
                                 class="form-control"
-                                id="caregiver_green_id"
-                                name="caregiver_green_id"
+                                id="care_green"
+                                name="care_green"
                                 required
                             >
                                 <option value="" disabled hidden selected>Select a caregiver</option>
                                 @foreach ($caregivers as $caregiver)
-                                    <option value="{{ $caregiver->user_id }}" 
-                                        {{ $caregiver->user_id == old('caregiver_id') ? 'selected' : "" }}>
+                                    <option value="{{ $caregiver->emp_id }}" 
+                                        {{ $caregiver->emp_id == old('care_green') ? 'selected' : "" }}>
                                         {{ ucfirst( $caregiver->getFullNameAttribute() ) }}
                                     </option>
                                 @endforeach
@@ -133,17 +139,17 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="caregiver_blue_id">Caregiver Blue</label>
+                            <label for="care_blue">Caregiver Blue</label>
                             <select
                                 class="form-control"
-                                id="caregiver_blue_id"
-                                name="caregiver_blue_id"
+                                id="care_blue"
+                                name="care_blue"
                                 required
                             >
                                 <option value="" disabled hidden selected>Select a caregiver</option>
                                 @foreach ($caregivers as $caregiver)
-                                    <option value="{{ $caregiver->user_id }}" 
-                                        {{ $caregiver->user_id == old('caregiver_id') ? 'selected' : "" }}>
+                                    <option value="{{ $caregiver->emp_id }}" 
+                                        {{ $caregiver->emp_id == old('care_blue') ? 'selected' : "" }}>
                                         {{ ucfirst( $caregiver->getFullNameAttribute() ) }}
                                     </option>
                                 @endforeach
