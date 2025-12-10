@@ -27,9 +27,9 @@
                         <td>{{ $schedule->supervisor->user->full_name }}</td>
 
                         <td>{{ $schedule->careRed->user->full_name }}</td>
-                        <td>{{ $schedule->careBlue->user->full_name }}</td>
-                        <td>{{ $schedule->careGreen->user->full_name }}</td>
                         <td>{{ $schedule->careYellow->user->full_name }}</td>
+                        <td>{{ $schedule->careGreen->user->full_name }}</td>
+                        <td>{{ $schedule->careBlue->user->full_name }}</td>
 
                     </tr>
                 @endforeach
