@@ -36,6 +36,8 @@ class HomeController extends Controller
             }
         }
 
-        return view('home');
+        return view('home', [
+            'role' => Auth::user()->getRoleName(),
+        ]);
     }
 }

@@ -5,6 +5,7 @@
 
 {{-- LINKS --}}
 <a href="{{ route('patient.list') }}" class="btn btn-light fw-bold mb-3">Patient List</a>
+<a href="{{ route('schedules.list') }}" class="btn btn-light fw-bold mb-3">View Schedule</a>
 
 {{-- PAST APPOINTMENTS --}}
 @if (count($appointmentsPast))

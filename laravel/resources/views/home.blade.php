@@ -26,8 +26,22 @@
         </div>
     </div>
 </div>
-        <a id="home-login" class="btn text-white" href="{{ route('login') }}">Login</a>
-        <br>
-        <a id="home-register" class="btn text-white" href="{{ route('register') }}">Register</a>
-    </body>
+<div class="container mt-2 alert" style="background-color: #333; border: 1px solid #454545">
+    <a href="{{ route('schedules.list') }}" class="btn btn-primary fw-bold mb-3">View Schedule</a>
+    @if (in_array($role, ['admin', 'supervisor']))
+        <a href="{{ route('appointments') }}" class="btn btn-primary fw-bold mb-3">Create Appointment</a>
+    @endif
+    @if (in_array($role, ['admin', 'supervisor']))
+        <a href="{{ route('employee.list') }}" class="btn btn-primary fw-bold mb-3">View Employees</a>
+    @endif
+    @if (in_array($role, ['admin', 'supervisor', 'caregivers']))
+        <a href="{{ route('patient.list') }}" class="btn btn-primary fw-bold mb-3">View Patients</a>
+    @endif
+    @if (in_array($role, ['admin', 'supervisor']))
+        <a href="{{ route('approval') }}" class="btn btn-primary fw-bold mb-3">Approve Users</a>
+    @endif
+
+</div>
+
+</body>
 @endsection
