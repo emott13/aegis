@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
     public function accessRoles()
     {
-        return $this->hasOne(User::class, 'role_id', 'role_id');
+        return $this->hasOne(AccessRole::class, 'role_id', 'role_id');
     }
 
     public function employee()

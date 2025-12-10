@@ -32,5 +32,7 @@ Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appoi
 Route::get('/patients/list', [PatientsController::class, 'patientListPage'])->name('patient.list');
 Route::get('/employees/list', [EmployeesController::class, 'employeeListPage'])->name('employee.list');
 
-Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
 Route::get('/patient/home', [PatientsController::class, 'home'])->name('patient.home')->middleware('auth');
+Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
+Route::get('/schedule/create', [Schedules::class, 'scheduleCreatePage'])->name('schedules.create')->middleware('auth');
+Route::post('/schedule/create', [Schedules::class, 'createSchedule'])->name('schedules.create')->middleware('auth');
