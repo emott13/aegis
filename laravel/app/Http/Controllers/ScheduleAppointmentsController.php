@@ -93,6 +93,6 @@ class ScheduleAppointmentsController extends Controller
         
         Appointment::create($validated);
 
-        return redirect()->route('schedules.create')->with('success', 'Appointment created successfully!');
+        return redirect()->route('appointments')->with('success', 'Appointment created successfully!');
     }
 }
