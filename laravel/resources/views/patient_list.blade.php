@@ -39,7 +39,7 @@ function formatPhoneNumber($phoneNumber) {
                 @foreach ($patients as $patient)
                     <tr>
                         <td>{{ $patient->patient_id }}</td>
-                        <td>{{ $patient->fname }} {{ $patient->lname }}</td> 
+                        <td><a href="{{ route('doctor.patient', ['patient_id' => $patient->patient_id]) }}">{{ $patient->fname }} {{ $patient->lname }}</a></td> 
                         {{-- <td>{{ $patient->email }}</td> --}}
                         <td>{{ UserController::age($patient->dob) }} years</td>
                         <td>{{ $patient->em_fname }} {{ $patient->em_lname }}</td>
