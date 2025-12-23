@@ -28,21 +28,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register-approval', [RegisterController::class, 'approval'])->name('approval')->middleware('auth');
 
 Route::get('/doctor/home', [Doctors::class, 'home'])->name('doctor.home')->middleware('auth');
-Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
-<<<<<<< HEAD
+Route::get('/doctor/patient/{patient_id}', [Doctors::class, 'patientOfDoctor'])->name('doctor.patient')->middleware('auth');
+Route::post('/doctor/patient/{patient_id}', [Doctors::class, 'patientOfDoctorPost'])->name('doctor.patient')->middleware('auth');
+Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments')->middleware('auth');
+Route::post('/doctor-appointment', [ScheduleAppointmentsController::class, 'createAppointment'])->name('appointments')->middleware('auth');
+
 Route::get('/patients/list', [PatientsController::class, 'patientListPage'])->name('patient.list');
 Route::get('/employees/list', [EmployeesController::class, 'employeeListPage'])->name('employee.list');
 
+Route::get('/patient/home', [PatientsController::class, 'home'])->name('patient.home')->middleware('auth');
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
-Route::get('/patient/home', [PatientsController::class, 'home'])->name('patient.home');
-
-Route::get('/test', function () {
-    return Auth::user()->getAccessLevel();
-})->name('test')->middleware('auth');
-=======
-Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list')->middleware('auth');
-Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
-
-Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
-Route::get('/patient/home', [Patients::class, 'home'])->name('patient.home');
->>>>>>> 34b916898d9150cebe39ec4fb9e54849098866cd
+Route::get('/schedule/create', [Schedules::class, 'scheduleCreatePage'])->name('schedules.create')->middleware('auth');
+Route::post('/schedule/create', [Schedules::class, 'createSchedule'])->name('schedules.create')->middleware('auth');

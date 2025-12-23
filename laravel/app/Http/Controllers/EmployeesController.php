@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Employee;
+use Auth;
 
 class EmployeesController extends Controller
 {
@@ -20,6 +21,8 @@ class EmployeesController extends Controller
 
     public function employeeListPage(Request $request)                           // Display Employee List page //
     {
+        if (!in_array(Auth::user()->getRoleName(), ['admin', 'supervisor']))
+            return redirect()->route('home.index');
         $order = $request->input('order', 'employee_id');                        // default sort if none provided
 
         $query = DB::table('employees')                                          // base query

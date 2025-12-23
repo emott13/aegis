@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use App\Models\Patient;
 use Auth;
 use DB;
 use Carbon\Carbon;
@@ -20,9 +21,8 @@ class Doctors extends Controller
         $doctor = $user->employee;
 
         if ($user->getRoleName() != 'doctor'){
-            return redirect('home');
+            return redirect()->route('home.index');
         }
-
 
         $today = now()->toDateString();
         // $today = now();
@@ -38,5 +38,75 @@ class Doctors extends Controller
             'appointmentsFuture' => $appointmentsFuture,
             'selectedDate' => $date->toDateString()
         ]);
+    }
+
+    public function patientOfDoctor(Request $request, $patient_id)
+    {
+        $user = Auth::user();
+        $doctor = $user->employee;
+
+        if ($user->getRoleName() != 'doctor'){
+            return redirect()->route('home.index');
+        }
+
+        $today = now()->toDateString();
+        $startToday = now()->setTime(0, 0, 0)->toDateTimeString();
+        $endToday = now()->setTime(23, 59, 59)->toDateTimeString();
+        $appointments = Appointment::all()
+            ->where('doctor_id', '=', $doctor->emp_id)
+            ->where('patient_id', '=', $patient_id)
+            ->sortBy('appt_date');
+        $appointmentToday = boolval(count(
+            Appointment::where('patient_id', '=', $patient_id)
+                ->where('appt_date', '>=', $startToday)
+                ->where('appt_date', '<=', $endToday)->get()
+        ));
+
+        return view('patient_of_doctor', [
+            'doctor' => $doctor,
+            'appointments' => $appointments,
+            'patient_id' => $patient_id,
+            'appointmentToday' => $appointmentToday,
+        ]);
+    }
+
+    public function patientOfDoctorPost(Request $request, $patient_id)
+    {
+        $user = Auth::user();
+        $doctor = $user->employee;
+
+        if ($user->getRoleName() != 'doctor'){
+            return redirect()->route('home.index');
+        }
+
+        $validatedAppt = $request->validate([
+            'doc_comment' => 'nullable|string|max:255',
+        ], []);
+        $validatedPatient = $request->validate([
+            'med_morn' => 'nullable|string|max:50',
+            'med_noon' => 'nullable|string|max:50',
+            'med_night' => 'nullable|string|max:50',
+        ], []);
+
+        $today = now()->toDateString();
+        $startToday = now()->setTime(0, 0, 0)->toDateTimeString();
+        $endToday = now()->setTime(23, 59, 59)->toDateTimeString();
+
+        // $appointmentsToday = Appointment::all()
+        //     ->where('doctor_id', '=', $doctor->emp_id)
+        //     ->where('appt_date', '=', $today)
+        //     ->where('patient_id', '=', $patient_id);
+        $appt = Appointment::where('patient_id', '=', $patient_id)
+            ->where('appt_date', '>=', $startToday)
+            ->where('appt_date', '<=', $endToday);
+        $patient = Patient::where('patient_id', '=', $patient_id);
+        if ($appt && $patient)
+        {
+            $appt->update($validatedAppt);
+            $patient->update($validatedPatient);
+        }
+        
+        return redirect()->route('doctor.patient', ['patient_id' => $patient_id]);
+
     }
 }

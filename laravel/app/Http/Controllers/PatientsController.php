@@ -23,7 +23,7 @@ class PatientsController extends Controller
         $patient = $user->patient;                                              // ensure user is patient
 
         if (!$patient){                                                         // redirect if user is not patient
-            return view('home');
+            return redirect()->route('home.index');
         }
 
         $careRecord = $patient->cares()                                         // retrieve care record
