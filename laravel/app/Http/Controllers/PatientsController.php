@@ -46,6 +46,9 @@ class PatientsController extends Controller
 
     public function patientListPage(Request $request)                           // Display Patient List page //
     {
+        if (!in_array(Auth::user()->getRoleName(), ['admin', 'supervisor', 'doctor', 'caregiver']))
+            return redirect('login');
+
         $order = $request->input('order', 'patient_id');                        // default sort if none provided
 
         $query = DB::table('patients')                                          // base query
@@ -63,8 +66,8 @@ class PatientsController extends Controller
                 $query->orderBy('users.lname')->orderBy('users.fname');
                 break;
 
-            case 'age':
-                $query->orderBy('age');
+            case 'dob':
+                $query->orderBy('dob');
                 break;
 
             case 'em_name':

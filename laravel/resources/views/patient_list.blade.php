@@ -28,7 +28,7 @@ function formatPhoneNumber($phoneNumber) {
                 <tr>
                     <th><a href="{{ route('patient.list', ['order' => 'patient_id']) }}">Patient ID</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'name']) }}">Name</a></th>
-                    <th><a href="{{ route('patient.list', ['order' => 'age']) }}">Age</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'dob']) }}">Age</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'em_name']) }}">Emergency Contact Name</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'em_phone']) }}">Emergency Phone</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'em_relation']) }}">Emergency Relation</a></th>

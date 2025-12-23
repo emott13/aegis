@@ -17,22 +17,19 @@ use Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::get('/register-approval', [RegisterController::class, 'approvalPage'])->name('approval')->middleware('auth');
-
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register-approval', [RegisterController::class, 'approval'])->name('approval')->middleware('auth');
 
+Route::get('/doctor/home', [Doctors::class, 'home'])->name('doctor.home')->middleware('auth');
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments');
+<<<<<<< HEAD
 Route::get('/patients/list', [PatientsController::class, 'patientListPage'])->name('patient.list');
 Route::get('/employees/list', [EmployeesController::class, 'employeeListPage'])->name('employee.list');
 
@@ -42,3 +39,10 @@ Route::get('/patient/home', [PatientsController::class, 'home'])->name('patient.
 Route::get('/test', function () {
     return Auth::user()->getAccessLevel();
 })->name('test')->middleware('auth');
+=======
+Route::get('/patients/list', [Patients::class, 'patientListPage'])->name('patient.list')->middleware('auth');
+Route::get('/employees/list', [Employees::class, 'employeeListPage'])->name('employee.list');
+
+Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
+Route::get('/patient/home', [Patients::class, 'home'])->name('patient.home');
+>>>>>>> 34b916898d9150cebe39ec4fb9e54849098866cd

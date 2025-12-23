@@ -7,7 +7,7 @@
     <title>Home</title>
 </head>
 @section('content')
-<div class="container">
+<div class="container" data-bs-theme="dark">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -26,8 +26,8 @@
         </div>
     </div>
 </div>
-        <a id="home-login" class="btn" href="{{ route('login') }}">Login</a>
+        <a id="home-login" class="btn text-white" href="{{ route('login') }}">Login</a>
         <br>
-        <a id="home-register" class="btn" href="{{ route('register') }}">Register</a>
+        <a id="home-register" class="btn text-white" href="{{ route('register') }}">Register</a>
     </body>
 @endsection

@@ -26,7 +26,7 @@
         background-color: #1c0032ee;
     }
 </style>
-<body>
+<body class="min-vh-100 position-relative">
     <div id="bckgrnd_overlay app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -65,7 +65,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-black" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -81,11 +81,11 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-        <p><a href="https://www.flaticon.com/free-icons/healthcare" title="healthcare icons">Healthcare icons created by Iconjam - Flaticon</a></p>
     </div>
+
+    <main class="py-4">
+        @yield('content')
+    </main>
+    <p class="position-absolute fixed-bottom mt-2"><a href="https://www.flaticon.com/free-icons/healthcare" title="healthcare icons">Healthcare icons created by Iconjam - Flaticon</a></p>
 </body>
 </html>

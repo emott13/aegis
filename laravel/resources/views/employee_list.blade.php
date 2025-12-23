@@ -19,7 +19,7 @@
                     <tr>
                         <th><a href="{{ route('employee.list', ['order' => 'emp_id']) }}">Employee ID</a></th>
                         <th><a href="{{ route('employee.list', ['order' => 'name']) }}">Name</a></th>
-                        <th><a href="{{ route('employee.list', ['order' => 'age']) }}">Age</a></th>
+                        <th><a href="{{ route('employee.list', ['order' => 'dob']) }}">Age</a></th>
                         <th><a href="{{ route('employee.list', ['order' => 'role_name']) }}">Role</a></th>
                         <th><a href="{{ route('employee.list', ['order' => 'salary']) }}">Salary</a></th>
                     </tr>

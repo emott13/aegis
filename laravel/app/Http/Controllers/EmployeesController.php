@@ -38,8 +38,8 @@ class EmployeesController extends Controller
                 $query->orderBy('users.lname')->orderBy('users.fname');
                 break;
 
-            case 'age':
-                $query->orderBy('age');
+            case 'dob':
+                $query->orderBy('dob');
                 break;
 
             case 'salary':

@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function employee()
     {
-        return $this->hasOne(User::class, 'user_id', 'user_id');
+        return $this->hasOne(Employee::class, 'user_id', 'user_id');
     }
     // getter functions
     public function getFullNameAttribute()

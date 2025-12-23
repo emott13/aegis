@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+<style>
+    label, small, h1 {
+        color: white;
+    }
+</style>
 @section('content')
     <body>
         <div class="container">
