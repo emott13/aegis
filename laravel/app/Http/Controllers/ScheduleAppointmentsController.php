@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\Employee;
 use App\Models\Patient;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleAppointmentsController extends Controller
 {

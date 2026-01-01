@@ -10,7 +10,11 @@
 <style>
     .main-form label,
     form > small {
-        color: white;
+        color: rgb(255, 255, 255);
+    }
+
+    #patient-emergency-div {
+        display: none;
     }
 </style>
 @section('content')
@@ -91,7 +95,7 @@
                                 placeholder="Password"
                                 required
                             >
-                            <small id="password-help" class="form-text text-white">We'll never share your password with anyone.</small>
+                            <small id="password-help" class="form-text text-white"><span style="color: #b9c508">We'll never share your password with anyone.</span></small>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -128,9 +132,9 @@
                                 name="role_id"
                                 required
                             >
-                                <option value="" disabled hidden selected>Select a Role</option>
+                                <option value="">Select a Role</option>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->role_id }}" 
+                                    <option class='reg_role_selection' value="{{ $role->role_id }}" 
                                         {{ $role->role_id == old('role_id') ? 'selected' : "" }}>
                                         {{ ucfirst( $role->role_name ) }}
                                     </option>
@@ -140,7 +144,8 @@
                     </div>
                 </div>
                 <br>
-                <div id="patient-emergency-div" class="row alert alert-warning mx-0">
+                {{-- following div doesn't show up unless role = patient --}}
+                <div id="patient-emergency-div" class="row alert alert-warning mx-0" style="background: #b9c508; color: #1c0032ee;">
                     <h3 class="text-black">Emergency Contact Info <small>(For patients)</small></h3>
                     <div class="form-group col-md-6">
                         <label for="emergency-fname">Emergency Contact First Name</label>
@@ -197,6 +202,7 @@
                         >
                     </div>
                 </div>
+                {{-- end emergency contact div --}}
                 <h6>Note: Your application will be reviewed before you can login.</h6>
                 <small>Already have an account? <a href={{ route('login') }}>Login</a></small>
                 <div class="row">
@@ -215,6 +221,32 @@
 
             </form>
         </div>
+        <script>
+            // handles displaying emergency contact inputs to user only when selected role is 'Patient'.
+            document.addEventListener('DOMContentLoaded', function () {
+                let roleSelect = document.getElementById('role_id');
+                let emergencyDiv = document.getElementById('patient-emergency-div');
+
+                let PATIENT_ROLE_ID = '{{ $roles->firstWhere("role_name", "patient")?->role_id }}';
+
+                function toggleEmergencyFields(){
+                    let inputs = emergencyDiv.querySelectorAll('input');
+
+                    if (roleSelect.value === PATIENT_ROLE_ID) {
+                        emergencyDiv.style.display = 'flex';
+                        inputs.forEach(input => input.disabled = false);
+                    } 
+                    else {
+                        emergencyDiv.style.display = 'none';
+                        inputs.forEach(input => input.disabled = true);
+                    }
+                }
+
+                toggleEmergencyFields();                                                    // on load
+                roleSelect.addEventListener('change', toggleEmergencyFields);               // on change
+            });
+        </script>
+
     </body>
 @endsection
 </html>

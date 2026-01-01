@@ -8,13 +8,14 @@ use App\Models\User;
 use App\Models\Patient;
 use App\Models\Employee;
 use Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
+    // methods
     public function index()
     {
-        $roles = AccessRole::all();
+        $roles = AccessRole::all();                                 // created with factory
 
         return view('register', ['roles' => $roles]);
     }
@@ -31,6 +32,8 @@ class RegisterController extends Controller
             'role_id' => 'required|exists:access_roles,role_id',
 
             // patient
+            // REQUIREMENT TO SEPERATE: try registration view?
+
             'emergency_fname' => 'max:50',
             'emergency_lname' => 'max:50',
             'emergency_phone' => 'max:10',
@@ -41,6 +44,22 @@ class RegisterController extends Controller
             'role_id.exists' => "Role does not exist",
             'password.regex' => 'Password must be at contain at least 8 characters, 1 capital letter, one lowercase letter, one number, and 1 special character (!$#%^&*)'
         ]);
+
+        // $request->validate([
+        //     'role_id' => ['required', 'exists:roles,role_id'],
+
+        //     'emergency_fname' => [
+        //         Rule::requiredIf(fn () => $request->role_id == $patientRoleId),
+        //         'string',
+        //         'nullable',
+        //     ],
+
+        //     'emergency_phone' => [
+        //         Rule::requiredIf(fn () => $request->role_id == $patientRoleId),
+        //         'nullable',
+        //     ],
+        // ]);
+
 
         $user = User::create($validated);
 

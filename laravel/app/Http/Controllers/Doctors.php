@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\Patient;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class Doctors extends Controller
