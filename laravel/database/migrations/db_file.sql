@@ -1,0 +1,2 @@
+-- Active: 1767324804942@@127.0.0.1@5432
+-- List all tables in the current schema

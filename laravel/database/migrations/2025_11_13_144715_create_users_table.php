@@ -6,32 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
-            $table->string('fname', 50);
-            $table->string('lname', 50);
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->date('dob');
-            $table->string('phone', 10)->nullable();
-            $table->boolean('approved')->default(false);
-            $table->rememberToken();
+            $table  ->  id              ('user_id')                             ;         // COLUMN id
 
-            $table->bigInteger('role_id')->unsigned();
-            $table->foreign('role_id')->references('role_id')->on('access_roles');
+            $table  ->  string          ('fname', 50)                           ;         // COLUMN first name
+            $table  ->  string          ('lname', 50)                           ;         // COLUMN last name
+            $table  ->  string          ('email')       ->  unique      ()      ;         // COLUMN email (generates unique)
+            $table  ->  string          ('password')                            ;         // COLUMN password
+            $table  ->  string          ('phone', 10)   ->  nullable    ()      ;         // COLUMN 10-digit phone num, allows NULL
 
-            $table->timestamps();
+            $table  ->  date            ('dob')                                 ;         // COLUMN date
+
+            $table  ->  boolean         ('approved')    ->  default     (true)  ;         // COLUMN default true for testing
+            
+            $table  ->  rememberToken   ()                                      ;
+
+            $table  ->  bigInteger      ('role_id')     ->  unsigned    ()      ;         // COLUMN role_id
+            $table  ->  foreignId       ('role_id')                                         // FKID
+                    ->  constrained     ('access_roles', 'role_id')                         // CONSTRAINED
+                    ->  onDelete        ('cascade')                             ;         // DELETES related parent -- child records
+            $table  ->  timestamps      ()                                      ;         // COLUMN timestamps
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');

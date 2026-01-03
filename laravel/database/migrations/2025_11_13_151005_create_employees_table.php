@@ -6,27 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
+
+    public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->id('emp_id');
-            $table->date('hire_date');
-            $table->integer('salary')->nullable();
+            $table  ->  id                  ('emp_id')                          ;   // COLUMN id            (AI)
+            $table  ->  date                ('hire_date')                       ;   // COLUMN date          (mm-dd-YY format??)
+            $table  ->  integer             ('salary')      ->  nullable    ()  ;   // COLUMN annual salary (set range in file:)
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users')
-                ->onDelete('cascade');
+            $table  ->  unsignedBigInteger  ('user_id')                         ;   // COLUMN user id       (foreign key user id)
+            $table  ->  foreignId           ('user_id')
+                    ->  constrained         ('employees', 'user_id')
+                    ->  onDelete            ('cascade')                         ;   // DELETE parent -- child related records
 
-            $table->timestamps();
+            $table  ->  timestamps          ()                                  ;   // COLUMN timestamps
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('employees');

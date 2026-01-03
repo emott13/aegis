@@ -1,29 +1,41 @@
-<?php
+<?
 
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-namespace Database\Factories;
-
-use App\Models\Employee;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\AccessRole;
+// use Illuminate\Support\Str;
 
 class EmployeeFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            'hire_date' => $this->faker->date(),
-            'salary'    => $this->faker->randomNumber(6, true),
-            'user_id'   => User::factory(),  // default, will be overridden in seeder
+            'hire_date' =>  $this   ->  faker   ->  date            (format: 'Y-m-d', max: '-2')   ,                          ,
+            'salary'    =>  $this   ->  faker   ->  numberBetween   (int1: 60000, int2: 170000)     ,
+            'user_id'   =>  null                                                                    ,   //  filled in by UserFactory
         ];
     }
 
-    public function user()
+    // relationships
+    public function doctor(): static
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->state(state: fn(): array => [
+            'role_id' => AccessRole::where(column: 'role_name', operator: 'doctor')->value(column: 'role_id'),
+        ]);
     }
 
-}
+    public function caregiver(): static
+    {
+        return $this->state(state: fn(): array => [
+            'role_id' => AccessRole::where(column: 'role_name', operator: 'caregiver')->value(column: 'role_id'),
+        ]);
+    }
 
+    public function supervisor(): static
+    {
+        return $this->state(state: fn(): array => [
+            'role_id' => AccessRole::where(column: 'role_name', operator: 'supervisor')->value(column: 'role_id'),
+        ]);
+    }
+}

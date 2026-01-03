@@ -9,19 +9,18 @@ class AccessRoleFactory extends Factory
     public function definition(): array
     {
         static $roles = [
-            ['admin', 1],
-            ['supervisor', 2],
-            ['doctor', 3],
-            ['caregiver', 4],
-            ['patient', 5],
-            ['family', 6],
+            ['admin']       ,
+            ['supervisor']  ,
+            ['doctor']      ,
+            ['caregiver']   ,
+            ['patient']     ,
+            ['family']      ,
         ];
 
-        $role = $roles[array_rand($roles)];
+        $role = $roles[array_rand(array: $roles)]  ;   //  randomly select a role
 
         return [
             'role_name' => $role[0],
-            'access_level' => $role[1]
         ];
     }
 }

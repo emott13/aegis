@@ -6,57 +6,61 @@ use App\Models\AccessRole;
 
 class AccessRolesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // GET api roles
+    // GET all roles
     public function index()
     {
-        return AccessRole::all();
+        return AccessRole::orderBy('role_id')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // POST /api/roles
+    // create a new roles
     public function store(Request $request)
     {
-        $request->validate([
-        'role_name' => 'required',
-        'access_level' => 'required',
+        $data = $request->validate([
+            'role_name' => 'required|string|max:20|unique:access_roles,role_name'
         ]);
 
-        return AccessRole::create($request->all());
+        // enforce lowercase consistency for compatability with postgres
+        $data['role_name'] = strtolower($data['role_name']);
+
+        return AccessRole::create($data);
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // GET /api/roles/{role}
+    // GET role by ID
+    public function show(AccessRole $role)
     {
-        return AccessRole::findOrFail($id);
+        return $role;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // PUT /api/roles/{role}
+    // update role
+    public function update(Request $request, AccessRole $role)
     {
-        $user = AccessRole::findOrFail($id);
-        $user -> update($request->all());
-        return $user;
+        $data = $request->validate([
+            'role_name' => 'required|string|max:20|unique:access_roles,role_name,' . $role->role_id . ',role_id'
+        ]);
+
+        $data['role_name'] = strtolower($data['role_name']);
+
+        $role->update($data);
+        return $role;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // DELETE /api/roles/{role}
+    // delete role
+    public function destroy(AccessRole $role)
     {
-        return AccessRole::destroy($id);
-    }
+        // Optional: prevent deleting critical roles
+        if (in_array($role->role_name, ['admin', 'supervisor'])) {
+            return response()->json([
+                'error' => 'This role cannot be deleted'
+            ], 403);
+        }
 
-    // // Relationship: one role has many users
-    // public function users()
-    // {
-    //     return $this->hasMany(User::class, 'role_id', 'role_id');
-    // }
+        $role->delete();
+        return response()->json(['message' => 'Role deleted']);
+    }
 }

@@ -12,22 +12,22 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        $minBirthdate = Carbon::now()->subYears(18)->format('Y-m-d');
+        $minBirthdate = Carbon::now()->subYears(value: 18)->format(format: 'Y-m-d');
 
-        $patientRoleId   =  AccessRole::where('role_name', 'patient')->value('role_id');
-        $familyRoleId    =  AccessRole::where('role_name', 'family')->value('role_id');
+        $patientRoleId   =  AccessRole::where(column: 'role_name', operator: 'patient')->value(column: 'role_id');
+        $familyRoleId    =  AccessRole::where(column: 'role_name', operator: 'family')->value(column: 'role_id');
 
-        $eligibleUsers = User::where('dob', '<=', $minBirthdate)
+        $eligibleUsers = User::where(column: 'dob', operator: '<=', value: $minBirthdate)
             ->whereNotIn('role_id', [$patientRoleId, $familyRoleId])
             ->whereDoesntHave('employee')  // not already an employee
             ->get();
 
         foreach ($eligibleUsers as $user) {
-            Employee::create([
+            Employee::create(attributes: [
                 'user_id'   => $user->user_id,
-                'hire_date' => now()->subDays(rand(10, 1000)),
-                'salary'    => rand(80000, 220000),
+                'hire_date' => now()->subDays(value: rand(min: 10, max: 365)),
+                'salary'    => rand(min: 80000, max: 220000),
             ]);
-        }
+        };
     }
 }
