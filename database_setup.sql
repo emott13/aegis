@@ -16,17 +16,19 @@ CREATE TABLE IF NOT EXISTS access_roles (
 
 
 CREATE TABLE IF NOT EXISTS users (
-    user_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    fname       VARCHAR(50) NOT NULL,
-    lname       VARCHAR(50) NOT NULL,
-    email       VARCHAR(255) UNIQUE NOT NULL,
-    password    VARCHAR(255) NOT NULL,
-    dob         DATE NOT NULL,
-    phone       VARCHAR(15),
-    approved    BOOLEAN NOT NULL DEFAULT false,
-    role_id     BIGINT NOT NULL REFERENCES access_roles(role_id),
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    user_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique user identifier   
+    fname       VARCHAR(50) NOT NULL,                                               -- first name   
+    lname       VARCHAR(50) NOT NULL,                                               -- last name
+    email       VARCHAR(255) UNIQUE NOT NULL,                                       -- email address
+    password    VARCHAR(255) NOT NULL,                                              -- hashed password
+    phone       VARCHAR(15),                                                        -- phone number
+    dob         DATE NOT NULL,                                                      -- date of birth
+    approved    BOOLEAN NOT NULL DEFAULT false,                                     -- account approval status
+
+    role_id     BIGINT NOT NULL REFERENCES access_roles(role_id),                   -- foreign key to access_roles table
+    
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,                                -- timestamp of user creation
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP     -- timestamp of last user update
 );
 
 CREATE TABLE patients (
