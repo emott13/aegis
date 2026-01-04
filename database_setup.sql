@@ -32,12 +32,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE patients (
-    patient_id      BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    user_id         BIGINT UNIQUE NOT NULL REFERENCES users(user_id),
-    family_code     VARCHAR(20),
-    admission_date  DATE NOT NULL,
-    care_group      VARCHAR(10) CHECK (care_group IN ('red','blue','green','yellow')),
-    bill_amount     INT DEFAULT 0
+    patient_id      BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique patient identifier
+    user_id         BIGINT UNIQUE NOT NULL REFERENCES users(user_id),                   -- foreign key to users table
+    family_code     VARCHAR(20),                                                        -- allows family member to access patient info   
+    admission_date  DATE NOT NULL,                                                      -- date of admission to care facility
+    care_group      VARCHAR(10) CHECK (care_group IN ('red','blue','green','yellow')),  -- care group assignment
+    bill_amount     INT DEFAULT 0,                                                      -- total amount billed to patient // updated each day
 );
 CREATE TABLE emergency_contacts (
     contact_id      BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
