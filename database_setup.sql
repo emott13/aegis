@@ -7,10 +7,11 @@ CREATE SCHEMA IF NOT EXISTS aegis;
 USE aegis;
 
 CREATE TABLE IF NOT EXISTS access_roles (
-    role_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,    -- unique role identifier
-    role_name   VARCHAR(20) UNIQUE NOT NULL                         -- name of the role (e.g., admin, doctor, nurse, supervisor, caregiver, patient)
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,                 -- timestamp of role creation
-    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- timestamp of last role update
+    role_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique role identifier
+    role_name   VARCHAR(20) UNIQUE NOT NULL                                         -- name of the role (e.g., admin, doctor, nurse, supervisor, caregiver, patient)
+    
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,                                -- timestamp of role creation
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP     -- timestamp of last role update
 );
 
 
