@@ -34,9 +34,10 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS patients (
     patient_id      BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique patient identifier
     family_code     VARCHAR(20),                                                        -- allows family member to access patient info   
-    care_group      VARCHAR(10) CHECK (care_group IN ('red','blue','green','yellow')),  -- care group assignment
     -- Emergency contact details moved to separate table --
-    admission_date  DATE NOT NULL,                                                      -- date of admission to care facility
+    -- can be null because admin/supervisor updates after user registration is approved.
+    care_group      VARCHAR(10) CHECK (care_group IN ('red','blue','green','yellow')),  -- care group assignment
+    admission_date  DATE,                                                               -- date of admission to care facility
     bill_amount     INT DEFAULT 0,                                                      -- total amount billed to patient // updated each day
     
     user_id         BIGINT UNIQUE NOT NULL REFERENCES users(user_id),                   -- foreign key to users table
