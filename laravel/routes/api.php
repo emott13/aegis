@@ -25,11 +25,11 @@ use App\Http\Controllers\AppointmentsController;
 Route   ::  apiResource (name: 'roles', 
     controller: AccessRolesController::class);
 
-Route   ::  middleware  (middleware: 'auth:sanctum')
-        ->  get         (uri: '/user', 
-        action: function (Request $request): mixed {
-        return $request->user();
-});
+// Route   ::  middleware  (middleware: 'auth:sanctum')
+//         ->  get         (uri: '/user', 
+//         action: function (Request $request): mixed {
+//         return $request->user();
+// });
 
 Route   ::  resource    (name: 'users', controller: UserController::class);
 Route   ::  resource    (name: 'patients', controller: PatientsController::class);
@@ -37,4 +37,4 @@ Route   ::  resource    (name: 'employees', controller: EmployeesController::cla
 Route   ::  resource    (name: 'schedules', controller: Schedules::class);
 Route   ::  resource    (name: 'cares', controller: CaresController::class);
 Route   ::  resource    (name: 'appointments', controller: AppointmentsController::class);
-Route   ::  apiResource (name: 'roles', controller: AccessRolesController::class);
+// Route   ::  apiResource (name: 'roles', controller: AccessRolesController::class);
