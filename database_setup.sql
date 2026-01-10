@@ -1,5 +1,5 @@
 -- Active: 1767324804942@@127.0.0.1@5432
--- database setup script for Aegis healthcare management system 
+-- database setup script for aegis healthcare management system 
 -- formatted for postgreSQL
 -- BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY
 

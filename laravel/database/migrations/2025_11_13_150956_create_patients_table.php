@@ -6,37 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up(): void                                                          // run the migrations
     {
-        Schema::create('patients', function (Blueprint $table) {
-            $table->id('patient_id');
-            $table->string('family_code', 20)->nullable();
-            $table->string('em_fname', 50)->nullable();
-            $table->string('em_lname', 50)->nullable();
-            $table->string('em_phone', 10)->nullable();
-            $table->string('em_relation', 20)->nullable();
-            $table->date('admission_date')->default(now());
-            $table->enum('care_group', array('red', 'blue', 'green', 'yellow'))->nullable();
-            $table->string('med_morn', 50)->nullable();
-            $table->string('med_noon', 50)->nullable();
-            $table->string('med_night', 50)->nullable();
-            $table->integer('bill_amount')->default(0);
+        Schema::create(table: 'patients', callback: function (Blueprint $table): void 
+        {
+            $table  ->  id              (column: 'patient_id');
+            $table  ->  string          (column: 'family_code', length: 20)->nullable();
+            $table  ->  string          (column: 'care_group', length: 10);
+            $table  ->  date            (column: 'admission_date');
+            $table  ->  integer         (column: 'bill_amount')->default(value: 0);
 
-            $table->bigInteger('user_id')->unsigned()->unique();
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table  ->  foreignId       (column: 'user_id')                             // FKID
+                    ->  constrained     (table: 'users', column: 'user_id')             // CONSTRAINED
+                    ->  onDelete        (action: 'cascade');                            // DELETES related parent--child records
 
-            $table->timestamps();
+            $table  ->  rememberToken   ();
+            $table  ->  timestamps      ();
+
+            // $table  ->  check("care_group IN ('red','blue','green','yellow')");      // not handled by laravel natively, needs controller or form request check instead
+            // $table  ->  index(columns: 'care_group');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down(): void                                                        // reverse the migrations
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists(table: 'patients');
     }
 };

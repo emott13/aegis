@@ -7,24 +7,26 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
 
-    public function up(): void
+    public function up(): void                                              // run the migrations
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table  ->  id                  ('emp_id')                          ;   // COLUMN id            (AI)
-            $table  ->  date                ('hire_date')                       ;   // COLUMN date          (mm-dd-YY format??)
-            $table  ->  integer             ('salary')      ->  nullable    ()  ;   // COLUMN annual salary (set range in file:)
+        Schema::create(table: 'employees', callback: function (Blueprint $table): void 
+        {
+            $table  ->  id              (column: 'emp_id');                 // COLUMN id            (AI)
+            $table  ->  date            (column: 'hire_date');              // COLUMN date          (mm-dd-YY format??)
+            $table  ->  integer         (column: 'salary')
+                    ->  nullable        ();                                 // COLUMN annual salary (set range in file:)
 
-            $table  ->  unsignedBigInteger  ('user_id')                         ;   // COLUMN user id       (foreign key user id)
-            $table  ->  foreignId           ('user_id')
-                    ->  constrained         ('employees', 'user_id')
-                    ->  onDelete            ('cascade')                         ;   // DELETE parent -- child related records
+            $table  ->  foreignId       (column: 'user_id')                             // FKID
+                    ->  constrained     (table: 'users', column: 'user_id')             // CONSTRAINED
+                    ->  onDelete        (action: 'cascade');                            // DELETES related parent--child records
 
-            $table  ->  timestamps          ()                                  ;   // COLUMN timestamps
+            $table  ->  rememberToken   ();
+            $table  ->  timestamps      ();                                 // COLUMN timestamps
         });
     }
 
-    public function down(): void
+    public function down(): void                                            // reverse the migrations
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists(table: 'employees');
     }
 };

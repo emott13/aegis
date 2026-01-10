@@ -6,35 +6,47 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up(): void                                                  // run the migrations
     {
-        Schema::create('cares', function (Blueprint $table) {
-            $table->id('record_id');
-            $table->boolean('med_morn')->nullable();
-            $table->boolean('med_noon')->nullable();
-            $table->boolean('med_night')->nullable();
-            $table->boolean('breakfast')->nullable();
-            $table->boolean('lunch')->nullable();
-            $table->boolean('dinner')->nullable();
-            $table->date('care_date')->default(today());
+        Schema::create(table: 'cares', callback: function (Blueprint $table): void 
+        {
+            $table  ->  id          (column: 'record_id');
+            $table  ->  date        (column: 'care_date')
+                    ->  default     (value: today());
+                    
+            $table  ->  boolean     (column: 'med_morn')
+                    ->  nullable    ();
+            $table  ->  boolean     (column: 'med_noon')
+                    ->  nullable    ();
+            $table  ->  boolean     (column: 'med_night')
+                    ->  nullable    ();
+            $table  ->  boolean     (column: 'breakfast')
+                    ->  nullable    ();
+            $table  ->  boolean     (column: 'lunch')
+                    ->  nullable    ();
+            $table  ->  boolean     (column: 'dinner')
+                    ->  nullable    ();
             
-            $table->bigInteger('emp_id')->unsigned();
-            $table->bigInteger('patient_id')->unsigned();
-            $table->foreign('emp_id')->references('emp_id')->on('employees')->onDelete('cascade');
-            $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
+            $table  ->  foreignId(column: 'patient_id')
+                    ->  constrained(table: 'patients', column: 'patient_id')
+                    ->  onDelete        (action: 'cascade');                            // DELETES related parent--child records
 
-            $table->timestamps();
+            $table  ->  foreignId(column: 'emp_id')
+                    ->  constrained(table: 'employees', column: 'emp_id')
+                    ->  onDelete        (action: 'cascade');                            // DELETES related parent--child records
+
+            $table  ->  unique(columns: ['patient_id', 'care_date']);
+        //             ->  unsigned();
+        //     $table  ->  foreignId   (column: 'patient_id')->references(column: 'patient_id')
+        //             ->  on          (table: 'patients')
+        //             ->  onDelete    (action: 'cascade');
+            $table  ->  rememberToken();
+            $table  ->  timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down(): void                                // reverse the migrations
     {
-        Schema::dropIfExists('cares');
+        Schema::dropIfExists(table: 'cares');
     }
 };

@@ -3,36 +3,62 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table  ->  id              ('user_id')                             ;         // COLUMN id
+        Schema::create(table: 'users', callback: function (Blueprint $table): void 
+        {
+            $table  ->  id              (column: 'user_id');                        // COLUMN id
+            $table  ->  string          (column: 'fname', length: 50);              // COLUMN first name
+            $table  ->  string          (column: 'lname', length: 50);              // COLUMN last name
+            $table  ->  string          (column: 'email')                           // COLUMN email
+                    ->  unique          ();                                         //  (generates unique)
+            $table  ->  string          (column: 'password');                       // COLUMN password
+            $table  ->  string          (column: 'phone', length: 15)               // COLUMN phone num 15->(eg. +1-111-111-1111)
+                    ->  nullable        ();                                         //  (allows NULL)
+            $table  ->  date            (column: 'dob');                            // COLUMN date
+            $table  ->  boolean         (column: 'approved')    
+                    ->  default         (value: true);                              // COLUMN default true for testing
 
-            $table  ->  string          ('fname', 50)                           ;         // COLUMN first name
-            $table  ->  string          ('lname', 50)                           ;         // COLUMN last name
-            $table  ->  string          ('email')       ->  unique      ()      ;         // COLUMN email (generates unique)
-            $table  ->  string          ('password')                            ;         // COLUMN password
-            $table  ->  string          ('phone', 10)   ->  nullable    ()      ;         // COLUMN 10-digit phone num, allows NULL
+            $table  ->  foreignId       (column: 'role_id')                         // FKID
+                    ->  constrained     (table: 'access_roles', column: 'role_id')  // CONSTRAINED
+                    ->  onDelete        (action: 'cascade');                        // DELETES related parent--child records
 
-            $table  ->  date            ('dob')                                 ;         // COLUMN date
-
-            $table  ->  boolean         ('approved')    ->  default     (true)  ;         // COLUMN default true for testing
-            
-            $table  ->  rememberToken   ()                                      ;
-
-            $table  ->  bigInteger      ('role_id')     ->  unsigned    ()      ;         // COLUMN role_id
-            $table  ->  foreignId       ('role_id')                                         // FKID
-                    ->  constrained     ('access_roles', 'role_id')                         // CONSTRAINED
-                    ->  onDelete        ('cascade')                             ;         // DELETES related parent -- child records
-            $table  ->  timestamps      ()                                      ;         // COLUMN timestamps
+            $table  ->  rememberToken   ();                                         // COLUMN remember token
+            $table  ->  timestamps      ();                                         // COLUMN timestamps
         });
+        
+        // -- Set starting ID for users to 9000 -- //
+        //
+        // check the database driver
+        // switch to set the sequence accordingly
+
+        switch (DB::getDriverName()){
+            case 'pgsql':                                                           // PostgreSQL
+                DB::statement
+                (
+                    query: "ALTER SEQUENCE access_roles_role_id_seq RESTART WITH 9000;"
+                );
+                break;
+            case 'mysql':                                                           // MySQL
+                DB::statement
+                (
+                    query: "ALTER TABLE access_roles AUTO_INCREMENT = 9000;"
+                );
+                break;
+            default:
+                throw new RuntimeException
+                (
+                    message: ('Unsupported database driver: ' . DB::getDriverName())
+                );
+        }
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(table: 'users');
     }
 };
