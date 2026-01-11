@@ -4,23 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Patient extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     * @var string
-     */
-    protected $primaryKey = 'patient_id';
+    protected $table = 'patients';                      // table associated with the model
+    protected $primaryKey = 'patient_id';               // primary key associated with the table
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
+    protected $fillable = [                             // attributes that are mass assignable
         'family_code',
         'care_group',
         'admission_date',
@@ -31,18 +25,45 @@ class Patient extends Model
         'user_id'
     ];
 
-    public function user()
+    protected $casts = [                                // attributes that should be cast
+        'admission_date' => 'date',
+    ];
+
+    // -- Relational Functions -- //
+
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'user_id');
+        return $this->belongsTo(
+            related: User::class, 
+            foreignKey: 'user_id', 
+            ownerKey: 'user_id'
+        );
     }
 
-    public function cares()
+    public function emergencyContacts(): HasMany
     {
-        return $this->hasMany(Care::class, 'patient_id', 'patient_id');
+        return $this->hasMany(
+            related: EmergencyContact::class, 
+            foreignKey: 'patient_id', 
+            localKey: 'patient_id'
+        );
     }
 
-    public function appointments()
+    public function cares(): HasMany
     {
-        return $this->hasMany(Appointment::class, 'patient_id', 'patient_id');
+        return $this->hasMany(
+            related: Care::class, 
+            foreignKey: 'patient_id', 
+            localKey: 'patient_id'
+        );
+    }
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(
+            related: Appointment::class, 
+            foreignKey: 'patient_id', 
+            localKey: 'patient_id'
+        );
     }
 }
