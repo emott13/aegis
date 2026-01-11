@@ -33,22 +33,34 @@ class Employee extends Model
 
     public function cares(): HasMany
     {
-        return $this->hasMany(related: Care::class, foreignKey: 'emp_id', localKey: 'emp_id');
+        return $this->hasMany(
+            related:    Care::class, 
+            foreignKey: 'emp_id', 
+            localKey:   'emp_id');
     }
 
     public function doctorAppointments(): HasMany
     {
-        return $this->hasMany(related: Appointment::class, foreignKey: 'doctor_id', localKey: 'emp_id');
+        return $this->hasMany(
+            related:    Appointment::class, 
+            foreignKey: 'doctor_id', 
+            localKey:   'emp_id');
     }
 
     public function createdSchedules(): HasMany
     {
-        return $this->hasMany(related: Schedule::class, foreignKey: 'created_by', localKey: 'emp_id');
+        return $this->hasMany(
+            related:    Schedule::class, 
+            foreignKey: 'created_by', 
+            localKey:   'emp_id');
     }
 
     public function assignments(): HasMany
     {
-        return $this->hasMany(related: ScheduleAssignment::class, foreignKey: 'emp_id', localKey: 'emp_id');
+        return $this->hasMany(
+            related:    ScheduleAssignment::class, 
+            foreignKey: 'emp_id', 
+            localKey:   'emp_id');
     }
 
     // convenience: $employee->full_name
