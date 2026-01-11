@@ -14,13 +14,16 @@ class Employee extends Model
     protected $table = 'employees';                     // table associated with the model
     protected $primaryKey = 'emp_id';                   // primary key associated with the table
 
-    
     protected $fillable = [                             // attributes that are mass assignable
         'hire_date',
         'salary',
         'user_id',
     ];
 
+    protected $casts = [                                // attributes that should be cast
+        'hire_date' => 'date',
+    ];
+    
     // -- Relational Functions -- //
     public function user(): BelongsTo
     {

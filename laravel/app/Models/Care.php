@@ -4,41 +4,55 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Care extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     * @var string
-     */
-    protected $primaryKey = 'record_id';
+    protected $table = 'care_records';              // table associated with the model
+    protected $primaryKey = 'record_id';            // primary key associated with the table
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
+    protected $fillable = [                         // attributes that are mass assignable
         'care_date',
         'med_morn',
         'med_noon',
+        'med_eve',
         'med_night',
         'breakfast',
         'lunch',
         'dinner',
-        'emp_id',
         'patient_id',
+        'care_id',                                  // emp_id of the caregiver
     ];
 
-    public function employee()
+    protected $casts = [                            // attributes that should be cast
+        'care_date' => 'date',
+        'med_morn'  => 'boolean',
+        'med_noon'  => 'boolean',
+        'med_eve'   => 'boolean',
+        'med_night' => 'boolean',
+        'breakfast' => 'boolean',
+        'lunch'     => 'boolean',
+        'dinner'    => 'boolean',
+    ];
+
+    
+    // -- Relational Functions -- //
+
+    public function employee(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'emp_id', 'emp_id');
+        return $this->belongsTo(
+            related:    Employee::class, 
+            foreignKey: 'care_id', 
+            ownerKey:   'emp_id');
     }
 
-    public function patient()
+    public function patient(): BelongsTo
     {
-        return $this->belongsTo(Patient::class, 'patient_id', 'patient_id');
+        return $this->belongsTo(
+            related:    Patient::class, 
+            foreignKey: 'patient_id', 
+            ownerKey:   'patient_id');
     }
 }
