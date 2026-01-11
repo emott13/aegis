@@ -4,36 +4,42 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Appointment extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     * @var string
-     */
-    protected $primaryKey = 'appt_id';
+    protected $primaryKey = 'appt_id';              // primary key associated with the table
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
+    protected $fillable = [                         // attributes that are mass assignable
         'appt_date',
         'patient_id',
         'doctor_id',
         'doc_comment'
     ];
 
-    public function doctor()
+    Protected $casts = [
+        'appt_date' => 'date',
+        'appt_time' => 'datetime:H:i',
+    ];
+
+
+    // -- Relational Functions -- //
+
+    public function doctor(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'doctor_id', 'emp_id');
+        return $this->belongsTo(
+            related:    Employee::class, 
+            foreignKey: 'doctor_id', 
+            ownerKey:   'emp_id');
     }
 
-    public function patient()
+    public function patient(): BelongsTo
     {
-        return $this->belongsTo(Patient::class, 'patient_id', 'patient_id');
+        return $this->belongsTo(
+            related:    Patient::class, 
+            foreignKey: 'patient_id', 
+            ownerKey:   'patient_id');
     }
 }
