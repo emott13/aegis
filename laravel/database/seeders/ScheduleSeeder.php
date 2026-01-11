@@ -30,7 +30,7 @@ class ScheduleSeeder extends Seeder
         $usedEmployees = collect();
 
         $roles = [
-            ['shift' => 'morn', 'role' => 'doctor', 'count' => 1],
+            ['shift' => 'morn', 'role' => 'doctor', 'count' => 1, ],
             ['shift' => 'morn', 'role' => 'supervisor', 'count' => 1],
             ['shift' => 'morn', 'role' => 'caregiver', 'count' => 4],
             ['shift' => 'noon', 'role' => 'doctor', 'count' => 1],

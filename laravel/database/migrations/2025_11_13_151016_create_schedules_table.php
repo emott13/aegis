@@ -14,6 +14,7 @@ return new class extends Migration
             $table  ->  date(column: 'schedule_date');                                  // date of schedule  
 
             $table  ->  foreignId(column: 'created_by')                                 // emp who made the schedule
+                    ->  nullable()
                     ->  constrained(table: 'employees', column: 'emp_id');
 
             // All 7 employee references

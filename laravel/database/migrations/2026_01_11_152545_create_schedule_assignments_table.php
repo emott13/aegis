@@ -14,8 +14,7 @@ return new class extends Migration
 
             $table  ->  string(column: 'shift', length: 10);
             $table  ->  string(column: 'role', length: 20);
-            $table  ->  string(column: 'care_group', length: 10)
-                    ->  nullable();
+            $table  ->  string(column: 'care_group', length: 10);
 
             $table  ->  foreignId(column: 'schedule_id')
                     ->  constrained(table: 'schedules', column: 'schedule_id');
