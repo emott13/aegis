@@ -15,15 +15,25 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'fname'             =>  $this   ->  faker ->    boolean     (chanceOfGettingTrue: 50)    ?   $this   ->  faker   ->  firstNameFemale ()  :   $this   ->  faker           ->  firstNameMale   () ,                     
-            'lname'             =>  $this   ->  faker ->    lastName    ()                                                                                                                                  ,
-            'dob'               =>  $this   ->  faker ->    date        (format: 'Y-m-d', max: '-21 years')                                                                                                 ,
-            'email'             =>  $this   ->  faker ->    unique      ()  ->  safeEmail                            (),
-            'approved'          =>  $this   ->  faker ->    boolean     (chanceOfGettingTrue: 80)                                                                                                           ,
-            'phone'             =>  $this   ->  faker ->    phoneNumber ()                                          ,                                                                                                                                                
-            'password'          =>              Hash        ::  make            (value: 'password')                 ,   //  simple default,
-            'remember_token'    =>              Str         ::  random          (length: 10)                        ,
-            'role_id'           =>              AccessRole  ::  inRandomOrder   ()  ->  value   ('role_id')             // assign random role
+            'fname'             => $this    -> faker
+                                            -> boolean(chanceOfGettingTrue: 50) 
+                                            ? $this -> faker
+                                                    -> firstNameFemale()
+                                            : $this -> faker 
+                                                    -> firstNameMale(),                     
+            'lname'             =>  $this   -> faker   
+                                            -> lastName ()                                                                                                                                  ,
+            'dob'               =>  $this   -> faker 
+                                            -> date (format: 'Y-m-d', max: '-21 years')                                                                                                 ,
+            'email'             =>  $this   -> faker 
+                                            -> unique ()  ->  safeEmail(),
+            'approved'          =>  $this   -> faker 
+                                            -> boolean (chanceOfGettingTrue: 100),          // all users approved by during testing                                                                                    ,
+            'phone'             =>  $this   -> faker 
+                                            -> phoneNumber (),                                                                                                                                                
+            'password'          => Hash       :: make (value: 'password'),                  //  simple default,
+            'remember_token'    => Str        :: random (length: 10),
+            'role_id'           => AccessRole :: inRandomOrder ()  ->  value ('role_id')    // assign random role
         ];
     }
 

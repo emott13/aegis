@@ -32,21 +32,21 @@ class AccessRoleFactory extends Factory
 
     public function doctor(): static
     {
-        return $this->state(fn () => ['role_name' => 'doctor']);
+        return $this->state(state: fn (): array => ['role_name' => 'doctor']);
     }
 
     public function caregiver(): static
     {
-        return $this->state(fn () => ['role_name' => 'caregiver']);
+        return $this->state(state: fn (): array => ['role_name' => 'caregiver']);
     }
 
     public function patient(): static
     {
-        return $this->state(fn () => ['role_name' => 'patient']);
+        return $this->state(state: fn (): array => ['role_name' => 'patient']);
     }
 
     public function family(): static
     {
-        return $this->state(fn () => ['role_name' => 'family']);
+        return $this->state(state: fn (): array => ['role_name' => 'family']);
     }
 }
