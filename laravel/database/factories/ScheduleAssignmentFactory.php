@@ -14,11 +14,16 @@ class ScheduleAssignmentFactory extends Factory
     public function definition(): array
     {
         return [
+            // 'shift'         => $this->faker->randomElement(array: ['morn','noon','eve','night']),
+            // 'role'          => $this->faker->randomElement(array: ['doctor','supervisor','caregiver']),
+            // 'care_group'    => $this->faker->randomElement(array: ['red','blue','green','yellow']),
+            // 'schedule_id'   => Schedule::inRandomOrder()->value('schedule_id'),
+            // 'emp_id'        => Employee::inRandomOrder()->value('emp_id'),
+
+            
             'shift'         => $this->faker->randomElement(array: ['morn','noon','eve','night']),
             'role'          => $this->faker->randomElement(array: ['doctor','supervisor','caregiver']),
-            'care_group'    => $this->faker->randomElement(array: ['red','blue','green','yellow']),
-            'schedule_id'   => Schedule::inRandomOrder()->value('schedule_id'),
-            'emp_id'        => Employee::inRandomOrder()->value('emp_id'),
+            
         ];
     }
 }

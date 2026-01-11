@@ -20,7 +20,7 @@ class AccessRoleSeeder extends Seeder
         ];
 
         foreach ($roles as $role) {
-            AccessRole::firstOrCreate(
+            AccessRole::create(
                 attributes: [
                     'role_name' => $role
                 ]

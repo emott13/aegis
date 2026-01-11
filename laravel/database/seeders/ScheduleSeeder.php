@@ -2,48 +2,67 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Schedule;
+use App\Models\ScheduleAssignment;
+use App\Models\Employee;
+use Carbon\Carbon;
 
 class ScheduleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $doctorIds = DB::table('users')
-            ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
-            ->join('employees', 'users.user_id', 'employees.user_id')
-            ->where('access_roles.role_name', 'doctor')
-            ->pluck('emp_id');
-        $supervisorIds = DB::table('users')
-            ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
-            ->join('employees', 'users.user_id', 'employees.user_id')
-            ->where('access_roles.role_name', 'doctor')
-            ->pluck('emp_id');
-        $caregiverIds = DB::table('users')
-            ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
-            ->join('employees', 'users.user_id', 'employees.user_id')
-            ->where('access_roles.role_name', 'caregiver')
-            ->pluck('emp_id');
-        
-        $n = count($doctorIds)*5;
-        for ($i = 0; $i < $n; $i++)
-        {
-            DB::table('schedules')->insert([
-                'schedule_date' => fake()->date(),
-                'made_by' => fake()->randomElement($doctorIds),
-                'doctor_id' => fake()->randomElement($doctorIds),
-                'supervisor_id' => fake()->randomElement($supervisorIds),
-                'care_red' => fake()->randomElement($caregiverIds),
-                'care_blue' => fake()->randomElement($caregiverIds),
-                'care_green' => fake()->randomElement($caregiverIds),
-                'care_yellow' => fake()->randomElement($caregiverIds),
-            ]);
-        }
+        $dates = collect(value: range(start: 1, end: 10))
+            ->map(callback: fn (int $i): string => Carbon::now()->addDays(value: $i)->toDateString());
 
+        foreach ($dates as $date) {
+            $schedule = Schedule::create(attributes: [
+                'schedule_date' => $date,
+                'created_by' => Employee::inRandomOrder()->value('emp_id'),
+            ]);
+
+            $this->assignEmployees(schedule: $schedule);
+        }
     }
 
+    protected function assignEmployees(Schedule $schedule): void
+    {
+        $usedEmployees = collect();
+
+        $roles = [
+            ['shift' => 'morn', 'role' => 'doctor', 'count' => 1],
+            ['shift' => 'morn', 'role' => 'supervisor', 'count' => 1],
+            ['shift' => 'morn', 'role' => 'caregiver', 'count' => 4],
+            ['shift' => 'noon', 'role' => 'doctor', 'count' => 1],
+            ['shift' => 'noon', 'role' => 'supervisor', 'count' => 1],
+            ['shift' => 'noon', 'role' => 'caregiver', 'count' => 4],
+            ['shift' => 'eve', 'role' => 'doctor', 'count' => 1],
+            ['shift' => 'eve', 'role' => 'supervisor', 'count' => 1],
+            ['shift' => 'eve', 'role' => 'caregiver', 'count' => 4],
+            ['shift' => 'night', 'role' => 'doctor', 'count' => 1],
+            ['shift' => 'night', 'role' => 'supervisor', 'count' => 1],
+            ['shift' => 'night', 'role' => 'caregiver', 'count' => 4],
+        ];
+
+        foreach ($roles as $slot) {
+            for ($i = 0; $i < $slot['count']; $i++) {
+                $employee = Employee::whereNotIn('emp_id', $usedEmployees)
+                    ->inRandomOrder()
+                    ->first();
+
+                if (!$employee) {
+                    return; // no more employees available
+                }
+
+                ScheduleAssignment::create([
+                    'schedule_id' => $schedule->schedule_id,
+                    'emp_id' => $employee->emp_id,
+                    'shift' => $slot['shift'],
+                    'role' => $slot['role'],
+                ]);
+
+                $usedEmployees->push(values: $employee->emp_id);
+            }
+        }
+    }
 }
