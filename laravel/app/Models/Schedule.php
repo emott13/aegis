@@ -4,66 +4,40 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Schedule extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     * @var string
-     */
-    protected $primaryKey = 'schedule_id';
+    protected $primaryKey = 'schedule_id';          // primary key associated with the table
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
+    protected $fillable = [                         // attributes that are mass assignable
         'schedule_date',
-        'made_by',
-        'doctor_id',
-        'supervisor_id',
-        'care_red',
-        'care_blue',
-        'care_green',
-        'care_yellow',
+        'created_by',
     ];
 
-    // Methods
-    public function madeBy()
+    protected $casts = [                            // attributes that should be cast
+        'schedule_date' => 'date',
+    ];
+
+    
+    // -- Relational Functions -- //
+
+        public function creator(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'made_by', 'emp_id')->with('user');
+        return $this->belongsTo(
+            related: Employee::class, 
+            foreignKey: 'created_by', 
+            ownerKey: 'emp_id');
     }
 
-    public function doctor()
+    public function assignments(): HasMany
     {
-        return $this->belongsTo(Employee::class, 'doctor_id', 'emp_id')->with('user');
-    }
-
-    public function supervisor()
-    {
-        return $this->belongsTo(Employee::class, 'supervisor_id', 'emp_id')->with('user');
-    }
-
-    public function careRed()
-    {
-        return $this->belongsTo(Employee::class, 'care_red', 'emp_id')->with('user');
-    }
-
-    public function careBlue()
-    {
-        return $this->belongsTo(Employee::class, 'care_blue', 'emp_id')->with('user');
-    }
-
-    public function careGreen()
-    {
-        return $this->belongsTo(Employee::class, 'care_green', 'emp_id')->with('user');
-    }
-
-    public function careYellow()
-    {
-        return $this->belongsTo(Employee::class, 'care_yellow', 'emp_id')->with('user');
+        return $this->hasMany(
+            related: ScheduleAssignment::class, 
+            foreignKey: 'schedule_id', 
+            localKey: 'schedule_id');
     }
 }
