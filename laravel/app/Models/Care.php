@@ -21,13 +21,13 @@ class Care extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'care_date',
         'med_morn',
         'med_noon',
         'med_night',
         'breakfast',
         'lunch',
         'dinner',
-        'care_date',
         'emp_id',
         'patient_id',
     ];

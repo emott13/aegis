@@ -24,6 +24,7 @@ class Appointment extends Model
         'appt_date',
         'patient_id',
         'doctor_id',
+        'doc_comment'
     ];
 
     public function doctor()

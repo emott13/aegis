@@ -22,15 +22,11 @@ class Patient extends Model
      */
     protected $fillable = [
         'family_code',
-        'em_fname',
-        'em_lname',
-        'em_phone',
-        'em_relation',
-        'admission_date',
         'care_group',
-        'med_morn',
-        'med_noon',
-        'med_night',
+        'admission_date',
+        // 'med_morn',
+        // 'med_noon',
+        // 'med_night',
         'bill_amount',
         'user_id'
     ];

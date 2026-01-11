@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Factories\UserFactory;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -15,7 +16,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-
+        // $test = DB::raw(('SELECT * from access_roles;'));
+        // var_dump($test);
         User    ::  factory ()  ->  admin       ()  ->  create  ([
             'fname'     =>  'System'                                ,
             'lname'     =>  'Administrator'                         ,

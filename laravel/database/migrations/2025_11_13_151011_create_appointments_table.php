@@ -6,30 +6,35 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up(): void                                                  // run the migration
     {
-        Schema::create('appointments', function (Blueprint $table) {
-            $table->id('appt_id');
-            $table->datetime('appt_date');
+        Schema::create(table: 'appointments', callback: function (Blueprint $table): void 
+        {
+            $table  ->  id              (column: 'appt_id');
+            $table  ->  datetime        (column: 'appt_date');
 
-            $table->bigInteger('patient_id')->unsigned();
-            $table->bigInteger('doctor_id')->unsigned();
-            $table->string('doc_comment')->nullable();
-            $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
-            $table->foreign('doctor_id')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table  ->  bigInteger      (column: 'patient_id')
+                    ->  unsigned        ();
+            $table  ->  bigInteger      (column: 'doctor_id')   
+                    ->  unsigned        ();
+            $table  ->  string          (column: 'doc_comment') 
+                    ->  nullable        ();
+            $table  ->  foreign         (columns: 'patient_id')
+                    ->  references      (columns: 'patient_id')
+                    ->  on              (table: 'patients')
+                    ->  onDelete        (action: 'cascade');
+            $table  ->  foreign         (columns: 'doctor_id')
+                    ->  references      (columns: 'emp_id')
+                    ->  on              (table: 'employees')
+                    ->  onDelete        (action: 'cascade');
 
-            $table->timestamps();
+            $table  ->  rememberToken   ();
+            $table  ->  timestamps      ();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down(): void                                                // reverse the migration
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists(table: 'appointments');
     }
 };

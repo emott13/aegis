@@ -27,42 +27,42 @@ class UserFactory extends Factory
         ];
     }
 
-    public function admin(): UserFactory
+    public function admin(): static
     {
         return $this->state(state: fn (): array => [
             'role_id' => AccessRole::where(column: 'role_name', operator: 'admin')->value(column: 'role_id')
         ]);
     }
 
-    public function supervisor(): UserFactory
+    public function supervisor(): static
     {
         return $this->state(state: fn (): array => [
             'role_id' => AccessRole::where(column: 'role_name', operator: 'supervisor')->value(column: 'role_id')
         ]);
     }
 
-    public function doctor(): UserFactory
+    public function doctor(): static
     {
         return $this->state(state: fn (): array => [
             'role_id' => AccessRole::where(column: 'role_name', operator: 'doctor')->value(column: 'role_id')
         ]);
     }
 
-    public function caregiver(): UserFactory
+    public function caregiver(): static
     {
         return $this->state(state: fn (): array => [
             'role_id' => AccessRole::where(column: 'role_name', operator: 'caregiver')->value(column: 'role_id')
         ]);
     }
 
-    public function patient(): UserFactory
+    public function patient(): static
     {
         return $this->state(state: fn (): array => [
             'role_id' => AccessRole::where(column: 'role_name', operator: 'patient')->value(column: 'role_id')
         ]);
     }
 
-    public function family(): UserFactory
+    public function family(): static
     {
         return $this->state(state: fn (): array => [
             'role_id' => AccessRole::where(column: 'role_name', operator: 'family')->value(column: 'role_id')

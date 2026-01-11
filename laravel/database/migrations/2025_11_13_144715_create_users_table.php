@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -17,7 +16,7 @@ return new class extends Migration
             $table  ->  string          (column: 'email')                           // COLUMN email
                     ->  unique          ();                                         //  (generates unique)
             $table  ->  string          (column: 'password');                       // COLUMN password
-            $table  ->  string          (column: 'phone', length: 15)               // COLUMN phone num 15->(eg. +1-111-111-1111)
+            $table  ->  string          (column: 'phone', length: 17)               // COLUMN phone num 15->(eg. +1-111-111-1111)
                     ->  nullable        ();                                         //  (allows NULL)
             $table  ->  date            (column: 'dob');                            // COLUMN date
             $table  ->  boolean         (column: 'approved')    
@@ -36,25 +35,25 @@ return new class extends Migration
         // check the database driver
         // switch to set the sequence accordingly
 
-        switch (DB::getDriverName()){
-            case 'pgsql':                                                           // PostgreSQL
-                DB::statement
-                (
-                    query: "ALTER SEQUENCE access_roles_role_id_seq RESTART WITH 9000;"
-                );
-                break;
-            case 'mysql':                                                           // MySQL
-                DB::statement
-                (
-                    query: "ALTER TABLE access_roles AUTO_INCREMENT = 9000;"
-                );
-                break;
-            default:
-                throw new RuntimeException
-                (
-                    message: ('Unsupported database driver: ' . DB::getDriverName())
-                );
-        }
+        // switch (DB::getDriverName()){
+        //     case 'pgsql':                                                           // PostgreSQL
+        //         DB::statement
+        //         (
+        //             query: "ALTER SEQUENCE user_id_seq RESTART WITH 9000;"
+        //         );
+        //         break;
+        //     case 'mysql':                                                           // MySQL
+        //         DB::statement
+        //         (
+        //             query: "ALTER TABLE users AUTO_INCREMENT = 9000;"
+        //         );
+        //         break;
+        //     default:
+        //         throw new RuntimeException
+        //         (
+        //             message: ('Unsupported database driver: ' . DB::getDriverName())
+        //         );
+        // }
     }
 
     public function down(): void
