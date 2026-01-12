@@ -31,6 +31,8 @@ class HomeController extends Controller
                     return redirect()->route('patient.home');
                 case 'doctor':
                     return redirect()->route('doctor.home');
+                case 'family':
+                    return redirect()->route('family.home');
                 default:
                     break;
             }

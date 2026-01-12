@@ -40,3 +40,5 @@ Route::get('/patient/home', [PatientsController::class, 'home'])->name('patient.
 Route::get('/schedule/list', [Schedules::class, 'scheduleListPage'])->name('schedules.list');
 Route::get('/schedule/create', [Schedules::class, 'scheduleCreatePage'])->name('schedules.create')->middleware('auth');
 Route::post('/schedule/create', [Schedules::class, 'createSchedule'])->name('schedules.create')->middleware('auth');
+
+Route::get('/family/home', [FamilyController::class, 'home'])->name('family.home')->middleware('auth');

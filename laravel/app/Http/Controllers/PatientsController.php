@@ -134,5 +134,6 @@ class PatientsController extends Controller
     {
         return Patient::destroy($id);
     }
+    
 
 }
