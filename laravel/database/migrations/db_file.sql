@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS patients (
     -- updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP     -- timestamp of last patient record update
 );
 CREATE TABLE IF NOT EXISTS emergency_contacts (
-    contact_id      BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique contact identifier
-    fname           VARCHAR(50),                                                        -- first name
-    lname           VARCHAR(50),                                                        -- last name
-    phone           VARCHAR(15),                                                        -- phone number
+    em_id      BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique contact identifier
+    em_fname        VARCHAR(50),                                                        -- first name
+    em_lname        VARCHAR(50),                                                        -- last name
+    em_phone        VARCHAR(15),                                                        -- phone number
     relation        VARCHAR(20),                                                        -- emergency contact relationship to patient
 
     patient_id      BIGINT NOT NULL REFERENCES patients(patient_id),                    -- foreign key to patients table
@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS appointments (
 CREATE TABLE IF NOT EXISTS schedules (
     schedule_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique schedule identifier
     schedule_date   DATE NOT NULL,                                                      -- date of schedule
-    
-    created_by      BIGINT NOT NULL REFERENCES employees(emp_id),                       -- employee who made the schedule
+
+    created_by      BIGINT NOT NULL REFERENCES users(user_id),                          -- user who made the schedule
 
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP                                 -- timestamp of schedule creation
     -- updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    -- timestamp of last schedule update

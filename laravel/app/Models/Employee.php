@@ -21,7 +21,7 @@ class Employee extends Model
     ];
 
     protected $casts = [                                // attributes that should be cast
-        'hire_date' => 'date',
+        'hire_date' => 'date:m-d-Y',
     ];
     
     // -- Relational Functions -- //

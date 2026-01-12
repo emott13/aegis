@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EmergencyContact extends Model
 {
+    use HasFactory;
     protected $table = 'emergency_contacts';        // table associated with the model
-    protected $primaryKey = 'contact_id';           // primary key associated with the table
+    protected $primaryKey = 'em_id';           // primary key associated with the table
 
     protected $fillable = [                         // attributes that are mass assignable
-        'fname',
-        'lname',
-        'phone',
+        'em_fname',
+        'em_lname',
+        'em_phone',
         'relation',
         'patient_id',
     ];

@@ -13,9 +13,9 @@ class EmergencyContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'fname' => $this->faker->firstName(),
-            'lname' => $this->faker->lastName(),
-            'phone' => $this->faker->numerify(string: '##########'),
+            'em_fname' => $this->faker->firstName(),
+            'em_lname' => $this->faker->lastName(),
+            'em_phone' => $this->faker->numerify(string: '##########'),
             'relation' => $this->faker->randomElement(array: ['Spouse','Parent','Sibling','Child','Friend','Other']),
             'patient_id' => Patient::inRandomOrder()->value('patient_id'),
         ];

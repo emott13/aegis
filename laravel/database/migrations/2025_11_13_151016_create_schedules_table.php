@@ -13,9 +13,9 @@ return new class extends Migration
             $table  ->  id(column: 'schedule_id');                                      // primary key
             $table  ->  date(column: 'schedule_date');                                  // date of schedule  
 
-            $table  ->  foreignId(column: 'created_by')                                 // emp who made the schedule
+            $table  ->  foreignId(column: 'created_by')                                 // user who made the schedule (admin or supervisor)
                     ->  nullable()
-                    ->  constrained(table: 'employees', column: 'emp_id');
+                    ->  constrained(table: 'users', column: 'user_id');
 
             // All 7 employee references
         //     $table  ->  unsignedBigInteger(column: 'made_by');

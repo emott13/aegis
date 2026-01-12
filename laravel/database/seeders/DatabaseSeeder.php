@@ -19,24 +19,30 @@ class DatabaseSeeder extends Seeder
         $this   ->  call (
             class: [
                 AccessRoleSeeder::class,
+                UserSeeder::class,
+                EmployeeSeeder::class,
+                PatientSeeder::class,
+                EmergencyContactSeeder::class,
+                AppointmentSeeder::class,
+                ScheduleSeeder::class,
+                ScheduleAssignmentSeeder::class,
             ]
         );
 
-        User                ::factory(count: 60)->create();
 
-        Employee            ::factory(count: 30)->create();
-        Patient             ::factory(count: 30)->create();
+        // Employee            ::factory(count: 30)->create();
+        // Patient             ::factory(count: 30)->create();
 
-        EmergencyContact    ::factory(count: 20)->create();
-        Care                ::factory(count: 20)->create();
-        Appointment         ::factory(count: 20)->create();
+        // EmergencyContact    ::factory(count: 20)->create();
+        // Care                ::factory(count: 20)->create();
+        // Appointment         ::factory(count: 20)->create();
 
         // $this   ->  call (
         //     class: [
         //         ScheduleSeeder::class,
         //     ]
         // );
-        Schedule            ::factory(count: 10)->create();
-        ScheduleAssignment  ::factory(count: 40)->create();
+        // Schedule            ::factory(count: 10)->create();
+        // ScheduleAssignment  ::factory(count: 40)->create();
     }
 }

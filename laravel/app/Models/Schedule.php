@@ -25,12 +25,12 @@ class Schedule extends Model
     
     // -- Relational Functions -- //
 
-        public function creator(): BelongsTo
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(
-            related: Employee::class, 
+            related: User::class, 
             foreignKey: 'created_by', 
-            ownerKey: 'emp_id');
+            ownerKey: 'user_id');
     }
 
     public function assignments(): HasMany

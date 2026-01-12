@@ -16,7 +16,7 @@ class AppointmentFactory extends Factory
         return [
             'appt_date'     => now()->addDays(value: rand(min: 1, max: 30))->toDateString(),
             'appt_time'     => $this->faker->time(format: 'H:i'),
-            'appt_comment'  => $this->faker->sentence(),
+            'doc_comment'  => $this->faker->sentence(),
             'patient_id'    => Patient::inRandomOrder()->value('patient_id'),
             'doctor_id'     => Employee::inRandomOrder()->value('emp_id'),
         ];

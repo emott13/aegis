@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Schedule;
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ScheduleFactory extends Factory
@@ -14,7 +15,7 @@ class ScheduleFactory extends Factory
     {
         return [
             'schedule_date' => now()->addDays(value: rand(min: 1, max: 30))->toDateString(),
-            'created_by'    => Employee::get()->value(key: 'emp_id'),
+            // 'created_by'    => User::get()->value(key: 'role_name')->where(value: 'admin')->random()->user_id,
         ];
     }
 }

@@ -1,10 +1,10 @@
-<?
+<?php
 
 namespace Database\Factories;
 
 use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
-// use App\Models\AccessRole;
+use App\Models\User;
 
 // use Illuminate\Support\Str;
 
@@ -14,9 +14,9 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'hire_date' =>  $this   ->  faker   ->  date            (format: 'Y-m-d', max: '-2')   ,                          ,
+            'hire_date' =>  $this   ->  faker   ->  date            (format: 'Y-m-d', max: '-2')   ,                          
             'salary'    =>  $this   ->  faker   ->  numberBetween   (int1: 60000, int2: 170000)     ,
-            'user_id'   =>  null                                                                    ,   //  filled in by UserFactory
+            'user_id'   =>  User::query()->inRandomOrder()->value(column: 'user_id')                 ,   //  filled in by UserFactory
         ];
     }
 

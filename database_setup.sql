@@ -2,9 +2,9 @@
 -- database setup script for aegis healthcare management system 
 -- formatted for postgreSQL
 -- BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY
-
-CREATE SCHEMA IF NOT EXISTS aegis;
 USE aegis;
+CREATE SCHEMA IF NOT EXISTS aegis;
+
 
 CREATE TABLE IF NOT EXISTS access_roles (
     role_id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique role identifier
@@ -132,7 +132,7 @@ create table if not exists schedules (
     schedule_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique schedule identifier
     schedule_date   DATE NOT NULL,                                                      -- date of schedule
     
-    created_by      BIGINT NOT NULL REFERENCES employees(emp_id),                       -- employee who made the schedule
+    created_by      BIGINT NOT NULL REFERENCES users(user_id),                       -- employee who made the schedule
 
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,                                -- timestamp of schedule creation
     updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    -- timestamp of last schedule update
