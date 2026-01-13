@@ -3,6 +3,34 @@
     p, label{
         color: white;
     }
+
+    .sctn_dv{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: space-between;
+        width: 800px;
+        margin: 2rem auto;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        margin-top: 20px;
+        box-shadow: inset 0 0 10px rgb(255, 255, 255);
+    }
+
+    .form{
+        column-count: 2;
+    }
+    
+    .form-item{
+        margin-top: 15px;
+    }
+
+    .form_label{
+        font-weight: 500;
+        font-size: 18px;
+    }
+
 </style>
 @section('content')
     <h1 class="container" style="font-weight: 600; text-align: center; color: white;">Family Home</h1>
@@ -11,16 +39,31 @@
     {{-- <a href="{{ route('schedules.list') }}" class="btn btn-light fw-bold mb-3">View Schedule</a> --}}
 
     {{-- send form to patients.php for handling --}}
-    <form method="POST" action="{{ route('family.home') }}">
-        <label for="date">Select Record Date:</label>
-        <input type="date" name="date" id="date">
+<div class="sctn_dv">
+    <form method="POST" action="{{ route('family.home') }}" class="form">
+        <div>
+            <label for="date" class="form-item form_label">Select Record Date:</label>
+            <input type="date" name="date" id="date" class="form-item">
+        </div>
 
-        <label for="fcode">Enter Family Code:</label>
-        <input type="text" name="fcode" id="fcode" placeholder="eg: FAM12345">
+        <div>
+            <label for="fcode" class="form-item form_label">Enter Family Code:</label>
+            <input type="text" name="fcode" id="fcode" class="form-item" placeholder="eg: FAM12345">
+        </div>
 
-        <label for="pid">Enter Patient ID</label>
-        <input type="number" name="pid" id="pid" placeholder="eg: 905364">
 
-        <button type="submit">View record</button>
+        <div>
+            <label for="pid" class="form-item form_label">Enter Patient ID</label>
+            <input type="number" name="pid" id="pid" class="form-item" placeholder="eg: 905364">
+        </div>
+
+        <div>
+            <button type="submit" class="form-item">View record</button>
+        </div>
     </form>
+</div>
+<div>
+
+</div>
+    
 @endsection
