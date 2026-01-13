@@ -63,7 +63,16 @@
     </form>
 </div>
 <div>
+    @if(isset($patient))
+        <div class="sctn_dv">
+            <h2 style="text-align: center; color: white;">Patient Information</h2>
+            <p><strong>Name:</strong> {{ $patient->name }}</p>
+            <p><strong>Age:</strong> {{ $patient->age }}</p>
 
+
+            <p>bill amount: {{ $patient->bill_amount }}</p>
+        </div>
+    @endif
 </div>
     
 @endsection

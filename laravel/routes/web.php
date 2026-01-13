@@ -42,3 +42,4 @@ Route::get('/schedule/create', [Schedules::class, 'scheduleCreatePage'])->name('
 Route::post('/schedule/create', [Schedules::class, 'createSchedule'])->name('schedules.create')->middleware('auth');
 
 Route::get('/family/home', [FamilyController::class, 'home'])->name('family.home')->middleware('auth');
+Route::post('/family/home', [FamilyController::class, 'handleform'])->name('family.home')->middleware('auth');
