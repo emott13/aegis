@@ -25,8 +25,8 @@ class CareFactory extends Factory
             'lunch'     => $this->faker->boolean(chanceOfGettingTrue: 50),
             'dinner'    => $this->faker->boolean(chanceOfGettingTrue: 75),
 
-            'patient_id'    => Patient::inRandomOrder()->value('patient_id'),
-            'emp_id'        => Employee::inRandomOrder()->value('emp_id'),
+            'patient_id'    => null,
+            'emp_id'        => null,
         ];
     }
 }
