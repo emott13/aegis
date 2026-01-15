@@ -18,14 +18,14 @@ class CareFactory extends Factory
 
             'med_morn'  => $this->faker->boolean(chanceOfGettingTrue: 80),
             'med_noon'  => $this->faker->boolean(chanceOfGettingTrue: 80),
-            'med_even'  => $this->faker->boolean(chanceOfGettingTrue: 80),
+            'med_eve'  => $this->faker->boolean(chanceOfGettingTrue: 80),
             'med_night' => $this->faker->boolean(chanceOfGettingTrue: 80),
 
             'breakfast' => $this->faker->boolean(chanceOfGettingTrue: 90),
             'lunch'     => $this->faker->boolean(chanceOfGettingTrue: 50),
             'dinner'    => $this->faker->boolean(chanceOfGettingTrue: 75),
 
-            'patient_id'    => null,
+            'patient_id'    => null,        // Set in CareSeeder
             'emp_id'        => null,
         ];
     }

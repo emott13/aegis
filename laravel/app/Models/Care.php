@@ -10,7 +10,7 @@ class Care extends Model
 {
     use HasFactory;
 
-    protected $table = 'care_records';              // table associated with the model
+    protected $table = 'cares';              // table associated with the model
     protected $primaryKey = 'record_id';            // primary key associated with the table
 
     protected $fillable = [                         // attributes that are mass assignable

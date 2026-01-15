@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS emergency_contacts (
 
 --     med_morn        varchar(50),                                                     -- morning medications   // assigned by doctor at appointment
 --     med_noon        varchar(50),                                                     -- noon medications      // assigned by doctor at appointment
---     med_even        varchar(50),                                                     -- evening medications   // assigned by doctor at appointment
+--     med_eve        varchar(50),                                                     -- evening medications   // assigned by doctor at appointment
 --     med_night       varchar(50),                                                     -- night medications      // assigned by doctor at appointment
 --     bill_amount     int DEFAULT 0,                                                   -- total amount billed to patient // updated each day
 --     user_id         int NOT NULL,                                                    -- foreign key to users
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS cares (
 
     med_morn        BOOLEAN DEFAULT false,                                              -- morning medication given
     med_noon        BOOLEAN DEFAULT false,                                              -- noon medication given
-    med_even        BOOLEAN DEFAULT false,                                              -- evening medication given
+    med_eve        BOOLEAN DEFAULT false,                                              -- evening medication given
     med_night       BOOLEAN DEFAULT false,                                              -- night medication given
     breakfast       BOOLEAN DEFAULT false,                                              -- breakfast provided
     lunch           BOOLEAN DEFAULT false,                                              -- lunch provided

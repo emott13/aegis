@@ -19,6 +19,8 @@ return new class extends Migration
                     ->  nullable    ();
             $table  ->  boolean     (column: 'med_noon')
                     ->  nullable    ();
+            $table  ->  boolean     (column: 'med_eve')
+                    ->  nullable    ();
             $table  ->  boolean     (column: 'med_night')
                     ->  nullable    ();
             $table  ->  boolean     (column: 'breakfast')

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                 AppointmentSeeder::class,
                 ScheduleSeeder::class,
                 ScheduleAssignmentSeeder::class,
+                CareSeeder::class,
             ]
         );
 
