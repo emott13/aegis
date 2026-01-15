@@ -19,29 +19,55 @@ class Schedules extends Controller
      */
     public function index()
     {
-        return Schedule::all();
+        $schedules = Schedule::with([
+            'creator.user',
+            'assignments.employee.user.role'
+        ])
+        ->orderBy('schedule_date')
+        ->get();
+
+        // $formatted = $schedules->map(function ($schedule) {
+
+        //     $shifts = $schedule->assignments
+        //         ->groupBy('shift')
+        //         ->map(function ($shiftAssignments) {
+
+        //             return $shiftAssignments->groupBy('role')->map(function ($roleAssignments) {
+        //                 return $roleAssignments->map(function ($assignment) {
+        //                     return [
+        //                         'emp_id'     => $assignment->emp_id,
+        //                         'name'       => $assignment->employee->user->fname . ' ' . $assignment->employee->user->lname,
+        //                         'role'       => $assignment->role,
+        //                         'care_group' => $assignment->care_group,
+        //                     ];
+        //                 });
+        //             });
+        //         });
+
+        //     return [
+        //         'schedule_id'   => $schedule->schedule_id,
+        //         'schedule_date' => $schedule->schedule_date,
+        //         'created_by'    => $schedule->creator
+        //             ? $schedule->creator->user->fname . ' ' . $schedule->creator->user->lname
+        //             : null,
+        //         'shifts'        => $shifts,
+        //     ];
+        // });
+
+        return view('schedules.index', compact('schedules'));
     }
+
 
     public function scheduleListPage(Request $request)
     {
-        $order = $request->input('order', 'schedule_date');
-
         $schedules = Schedule::with([
-            'madeBy.user',
-            'doctor.user',
-            'supervisor.user',
-            'careRed.user',
-            'careBlue.user',
-            'careGreen.user',
-            'careYellow.user'
+            'creator',
+            'assignments'
         ])
-        ->orderByDesc($order)
+        ->orderBy('schedule_date')
         ->get();
 
-        return view('schedule', [
-            'schedules' => $schedules,
-            'order' => $order
-        ]);
+        return view('schedule', compact('schedules'));
     }
 
     public function scheduleCreatePage()
