@@ -17,13 +17,33 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <style>
     body{
-        background-image: linear-gradient(#37005bb8, #1c0032ee) !important;
-        background-color: #1c0032ee;
+        /* background-image: linear-gradient(#37005bb8, #1c0032ee) !important; */
+        /* background-color: #1c0032ee; */
+        background-color: white;
+    }
+    .container{
+        font-family: 'Faustina';
+        width: 600px;
+    }
+    .footer-wrapper{
+        min-height: 4rem;
+        padding: 1rem;
+        background: #c2c2c2;
+    }
+    input[type="text"]{
+        background-color: #1c00324b !important;
+    } 
+    .form-control{
+        background: #1c0032ee;
     }
 </style>
 <body class="min-vh-100 position-relative">
@@ -86,6 +106,14 @@
     <main class="py-4">
         @yield('content')
     </main>
-    <p class="position-absolute fixed-bottom mt-2"><a href="https://www.flaticon.com/free-icons/healthcare" title="healthcare icons">Healthcare icons created by Iconjam - Flaticon</a></p>
+
+    <div class="position-absolute fixed-bottom footer-wrapper">
+        <footer class="footer">
+            <p>Aegis Healthcare facilities are Mecdicare and Medicaid approved.</p>
+            <p>Copyright 2026 Aegis Healthcare | All Rights Reserved</p>
+            <p>9876 Example Avenue, SampleTown, PA 67890 | Phone: 999-987-6543 </p>
+            <p class=""><a href="https://www.flaticon.com/free-icons/healthcare" title="healthcare icons">Healthcare icons created by Iconjam - Flaticon</a></p>
+        </footer>
+    </div>
 </body>
 </html>

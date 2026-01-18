@@ -7,62 +7,80 @@
     <title>Login</title>
 </head>
 <style>
-    label, small, h1 {
-        color: white;
+        label, small, h1 {
+        color: #1c0032ee;
+    }
+    .text-center{
+        color: #1c0032ee;
+    }
+    .form_control{
+        background: #1c0032ee;
+    }
+    body{
+        height: 100vh;
+    }
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        margin: 10vh auto;
     }
 </style>
 @section('content')
     <body>
-        <div class="container">
-            <h1 class="text-center">Login</h1> 
-            <br>
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="text-center">Login</h1> 
+                <br>
 
-            {{-- Login Form --}}
-            <form action="{{ route('login') }}" method="POST" class="">
-                @csrf
-                <div class="row">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input
-                            class="form-control"
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="{{ old('email') }}"
-                            placeholder="Email"
-                            required
-                        >
-                    </div>
+                {{-- Login Form --}}
+                <form action="{{ route('login') }}" method="POST" class="">
+                    @csrf
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input
+                                class="form-control"
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                placeholder="Email"
+                                required
+                            >
+                        </div>
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input
-                            class="form-control"
-                            type="password"
-                            id="password"
-                            name="password"
-                            value="{{ old('password') }}"
-                            placeholder="Password"
-                            required
-                        >
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input
+                                class="form-control"
+                                type="password"
+                                id="password"
+                                name="password"
+                                value="{{ old('password') }}"
+                                placeholder="Password"
+                                required
+                            >
+                        </div>
                     </div>
-                </div>
-                <small>Don't have an account? <a href={{ route('register') }}>Register here</a></small>
-                <div class="row mt-3">
-                    <div class="form-group col">
-                        <button type="submit" class="btn btn-primary form-control">Sign in</button>
+                    <small>Don't have an account? <a href={{ route('register') }}>Register here</a></small>
+                    <div class="row mt-3">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary form-control">Sign in</button>
+                        </div>
                     </div>
-                </div>
-                {{-- Validation errors --}}
-                @if ($errors->any())
-                    <ul class="alert alert-danger mt-2" role="alert">
-                        @foreach ($errors->all() as $error)
-                            <li class="list-group-item">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @endif
+                    {{-- Validation errors --}}
+                    @if ($errors->any())
+                        <ul class="alert alert-danger mt-2" role="alert">
+                            @foreach ($errors->all() as $error)
+                                <li class="list-group-item">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
 
-            </form>
+                </form>
+            </div>
         </div>
     </body>
 @endsection
