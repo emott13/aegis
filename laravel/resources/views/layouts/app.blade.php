@@ -26,9 +26,14 @@
 </head>
 <style>
     body{
+        color: #1c0032;
         /* background-image: linear-gradient(#37005bb8, #1c0032ee) !important; */
         /* background-color: #1c0032ee; */
         background-color: white;
+    }
+    .navbar-user-outline{
+        font-size: 20px;
+        color: #1c0032;
     }
     .container{
         font-family: 'Faustina';
@@ -65,6 +70,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        {{-- icon --}}
+                        <ion-icon class="navbar-user-outline" name="person-outline"></ion-icon>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -115,5 +122,7 @@
             <p class=""><a href="https://www.flaticon.com/free-icons/healthcare" title="healthcare icons">Healthcare icons created by Iconjam - Flaticon</a></p>
         </footer>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <style>
     p, label{
-        color: white;
+        color: #ffffff;
     }
 
     .sctn_dv{
@@ -15,7 +15,8 @@
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.5);
         margin-top: 20px;
-        box-shadow: inset 0 0 10px rgb(255, 255, 255);
+        background-color: #1c0032ee;
+        box-shadow: inset 0 0 10px #ffffff;
     }
 
     .form{
