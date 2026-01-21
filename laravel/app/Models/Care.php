@@ -27,7 +27,7 @@ class Care extends Model
     ];
 
     protected $casts = [                            // attributes that should be cast
-        'care_date' => 'date',
+        'care_date' => 'date', // format 
         'med_morn'  => 'boolean',
         'med_noon'  => 'boolean',
         'med_eve'   => 'boolean',
@@ -44,7 +44,7 @@ class Care extends Model
     {
         return $this->belongsTo(
             related:    Employee::class, 
-            foreignKey: 'care_id', 
+            foreignKey: 'emp_id', 
             ownerKey:   'emp_id');
     }
 

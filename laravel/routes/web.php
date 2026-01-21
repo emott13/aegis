@@ -43,3 +43,5 @@ Route::post('/schedule/create', [Schedules::class, 'createSchedule'])->name('sch
 
 Route::get('/family/home', [FamilyController::class, 'home'])->name('family.home')->middleware('auth');
 Route::post('/family/home', [FamilyController::class, 'handleform'])->name('family.home')->middleware('auth');
+
+Route::get('/care/records', [CaresController::class, 'caresPage'])->name('care.records')->middleware('auth');
