@@ -7,20 +7,40 @@
     <div style="width: 100%; padding: 0 10vw">
         @foreach ($schedules as $schedule)
             <div>
-                <h3>Date: {{ $schedule->schedule_date }}</h3>
+                <p>Date: {{ $schedule->schedule_date }}</p>
                 <p>Created by:
-                    {{ optional($schedule->creator?->user)->fname }}
-                    {{ optional($schedule->creator?->user)->lname }}
+                    {{-- {{ $schedule->creator?->user->fname }} --}}
+                    {{-- {{ $schedule->creator?->user->lname }} --}}
                 </p>
             </div>
             <hr>
             @foreach ($schedule->assignments as $assignment)
-                <p>
-                    {{ strtoupper($assignment->shift) }}
-                    — {{ $assignment->employee->user->fname }}
-                    ({{ $assignment->role }})
+            <table class="table table-sm table-striped table-hover table-border container">
+                <tr>
+                    <th>Shift</th>
+                    <th>Role</th>
+                    <th>Care Group</th>
+                    <th>Employee Name</th>
+                </tr>
+                <tr>
+                    <td>{{ strtoupper($assignment->shift) }}</td>
+                    <td>{{ $assignment->role }}</td>
+                    <td>{{ $assignment->care_group }}</td>
+                    <td>
+                        {{ $assignment->employee->user->fname }}
+                        {{ $assignment->employee->user->lname }}
+                    </td>
+                </tr>
+            </table>
+                {{-- <p>
+                    
+                    — 
+                    
                 </p>
+                <p>{{ $assignment->schedule_id }}</p>
+                <p>{{ $assignment->emp_id }}</p> --}}
             @endforeach
+            <hr>
         @endforeach
     </div>
 @else

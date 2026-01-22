@@ -21,8 +21,12 @@ class ScheduleAssignmentFactory extends Factory
             // 'emp_id'        => Employee::inRandomOrder()->value('emp_id'),
 
             
-            'shift'         => $this->faker->randomElement(array: ['morn','noon','eve','night']),
-            'role'          => $this->faker->randomElement(array: ['doctor','supervisor','caregiver']),
+            'shift'         => null,
+            'role'          => null,
+            'care_group'    => null,
+            'emp_id'        => null,
+            'schedule_id'   => null,
+
             
         ];
     }

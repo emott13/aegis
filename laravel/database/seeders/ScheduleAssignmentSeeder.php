@@ -5,69 +5,104 @@ namespace Database\Seeders;
 use App\Models\Employee;
 use App\Models\Schedule;
 use App\Models\ScheduleAssignment;
-use RuntimeException;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
+use RuntimeException;
 
 class ScheduleAssignmentSeeder extends Seeder
 {
-    private const CARE_GROUPS = ['red', 'blue', 'green', 'yellow'];
-    private const SHIFTS = ['morn', 'noon', 'eve', 'night'];
+    private const CARE_GROUPS = ['yellow', 'red', 'blue', 'green'];
+
+    private const SHIFTS = [
+        'morn' => ['doctor' => 1, 'supervisor' => 1, 'caregiver' => 4],
+        'noon' => ['doctor' => 1, 'supervisor' => 1, 'caregiver' => 4],
+        'eve'  => ['doctor' => 1, 'supervisor' => 1, 'caregiver' => 4],
+        'night'=> ['doctor' => 0, 'supervisor' => 1, 'caregiver' => 4],
+    ];
 
     public function run(): void
     {
-        $employees = Employee::with('user.role')
-            ->get()
-            ->keyBy('emp_id');
-        $schedules = Schedule::pluck(column: 'schedule_id');
+        $employees = Employee::with('user.role')->get();
 
-        if (empty($employees) || $schedules->isEmpty()) {
-            throw new RuntimeException('Missing employees or schedules');
+        $byRole = [
+            'doctor'     => $employees->where('user.role.role_name', 'doctor')->values(),
+            'supervisor' => $employees->where('user.role.role_name', 'supervisor')->values(),
+            'caregiver'  => $employees->where('user.role.role_name', 'caregiver')->values(),
+        ];
+
+        foreach ($byRole as $role => $list) {
+            if ($list->isEmpty()) {
+                throw new RuntimeException("No employees found for role: {$role}");
+            }
         }
 
-        foreach ($schedules as $scheduleId) {
-            $availableEmployees = $employees->keys()->shuffle();
+        $start = Carbon::today();
+        $end   = Carbon::today()->addDays(30);
 
-            foreach (self::SHIFTS as $shift) {      // Ensure unique employee per shift
-                if ($availableEmployees->isEmpty()) {                   
-                    break;                                              // Break if no more available employees
-                }
+        for ($date = $start; $date->lte($end); $date->addDay()) {
 
-                $empId = $availableEmployees->pop();                    // Assign and remove employee from available list
-                $employee = $employees[$empId];
-                $role = $employee->user->role->role_name;
+            $schedule = Schedule::firstOrCreate([
+                'schedule_date' => $date->toDateString(),
+            ]);
 
+            // Reset pools DAILY (no reuse across shifts)
+            $doctorPool     = $byRole['doctor']->shuffle()->values();
+            $supervisorPool = $byRole['supervisor']->shuffle()->values();
+            $caregiverPool  = $byRole['caregiver']->shuffle()->values();
 
-                $data = [
-                    'schedule_id' => $scheduleId,
-                    'emp_id' => $empId,
-                    'shift' => $shift,
-                ];
+            foreach (self::SHIFTS as $shift => $needs) {
 
-
-                if ($role === 'caregiver') {
-                    static $usedGroups = [];
-                    $usedGroups[$scheduleId][$shift] ??= [];
-
-                    $availableGroups = array_diff(
-                        self::CARE_GROUPS,
-                        $usedGroups[$scheduleId][$shift]
+                /** -------- Doctors -------- */
+                for ($i = 0; $i < $needs['doctor']; $i++) {
+                    $this->createAssignment(
+                        $schedule->schedule_id,
+                        $doctorPool->shift()->emp_id,
+                        'doctor',
+                        $shift,
+                        null
                     );
-
-                    if (empty($availableGroups)) {
-                        continue;
-                    }
-
-                    $group = collect($availableGroups)->random();
-                    $usedGroups[$scheduleId][$shift][] = $group;
-
-                    $data['care_group'] = $group;
                 }
 
-                if (in_array($role, ['doctor', 'supervisor', 'caregiver'])) {
-                    ScheduleAssignment::factory()->create($data);
+                /** ------ Supervisors ------ */
+                for ($i = 0; $i < $needs['supervisor']; $i++) {
+                    $this->createAssignment(
+                        $schedule->schedule_id,
+                        $supervisorPool->shift()->emp_id,
+                        'supervisor',
+                        $shift,
+                        null
+                    );
+                }
+
+                /** ------ Caregivers ------- */
+                if ($needs['caregiver'] > 0) {
+                    foreach (self::CARE_GROUPS as $group) {
+                        $this->createAssignment(
+                            $schedule->schedule_id,
+                            $caregiverPool->shift()->emp_id,
+                            'caregiver',
+                            $shift,
+                            $group
+                        );
+                    }
                 }
             }
         }
+    }
+
+    private function createAssignment(
+        int $scheduleId,
+        int $empId,
+        string $role,
+        string $shift,
+        ?string $careGroup
+    ): void {
+        ScheduleAssignment::factory()->create([
+            'schedule_id' => $scheduleId,
+            'emp_id'      => $empId,
+            'role'        => $role,
+            'shift'       => $shift,
+            'care_group'  => $careGroup, // NULL for non-caregivers
+        ]);
     }
 }

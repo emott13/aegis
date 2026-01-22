@@ -25,7 +25,6 @@ class ScheduleSeeder extends Seeder
         }
 
         Schedule::factory()
-            ->count(count: 7)
             ->create(attributes: [
                 'created_by' => $userIds->random(),
             ]);
