@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
                 EmployeeSeeder::class,
                 PatientSeeder::class,
                 EmergencyContactSeeder::class,
-                AppointmentSeeder::class,
                 ScheduleSeeder::class,
                 ScheduleAssignmentSeeder::class,
+                AppointmentSeeder::class,
                 CareSeeder::class,
             ]
         );

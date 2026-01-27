@@ -10,7 +10,7 @@
 <style>
     .main-form label,
     form > small {
-        color: white;
+        /* color: white; */
     }
 </style>
 @section('content')
@@ -62,13 +62,24 @@
                             <label for="appt_date">Date</label>
                             <input
                                 class="form-control"
-                                type="datetime-local"
+                                type="date"
                                 id="appt_date"
                                 name="appt_date"
                                 value="{{ old('appt_date') }}"
                                 required
                             >
                         </div>
+                        {{-- <div class="form-group col-md-6">
+                            <label for="appt_date">Time</label>
+                            <input
+                                class="form-control"
+                                type="time"
+                                id="appt_time"
+                                name="appt_time"
+                                value="{{ old('appt_time') }}"
+                                required
+                            >
+                        </div> --}}
                         <div class="form-group col-md-6">
                             <label for="doctor_id">Doctor</label>
                             <select
@@ -81,7 +92,7 @@
                                 @foreach ($doctors as $doctor)
                                     <option value="{{ $doctor->emp_id }}" 
                                         {{ $doctor->emp_id == old('doctor_id') ? 'selected' : "" }}>
-                                        {{ ucfirst( $doctor->getFullNameAttribute() ) }}
+                                        {{ ucfirst( $doctor->emp_id ) }}
                                     </option>
                                 @endforeach
                             </select>

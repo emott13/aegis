@@ -14,14 +14,15 @@ class Appointment extends Model
 
     protected $fillable = [                         // attributes that are mass assignable
         'appt_date',
+        // 'appt_time',
+        'appt_comment',
         'patient_id',
         'doctor_id',
-        'doc_comment'
     ];
 
     Protected $casts = [
         'appt_date' => 'date',
-        'appt_time' => 'datetime:H:i',
+        // 'appt_time' => 'datetime:H:i',
     ];
 
 

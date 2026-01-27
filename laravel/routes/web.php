@@ -30,6 +30,8 @@ Route::post('/register-approval', [RegisterController::class, 'approval'])->name
 Route::get('/doctor/home', [Doctors::class, 'home'])->name('doctor.home')->middleware('auth');
 Route::get('/doctor/patient/{patient_id}', [Doctors::class, 'patientOfDoctor'])->name('doctor.patient')->middleware('auth');
 Route::post('/doctor/patient/{patient_id}', [Doctors::class, 'patientOfDoctorPost'])->name('doctor.patient')->middleware('auth');
+
+// admin or supervisor schedules patient appt with doctor
 Route::get('/doctor-appointment', [ScheduleAppointmentsController::class, 'appointmentPage'])->name('appointments')->middleware('auth');
 Route::post('/doctor-appointment', [ScheduleAppointmentsController::class, 'createAppointment'])->name('appointments')->middleware('auth');
 
@@ -45,3 +47,6 @@ Route::get('/family/home', [FamilyController::class, 'home'])->name('family.home
 Route::post('/family/home', [FamilyController::class, 'handleform'])->name('family.home')->middleware('auth');
 
 Route::get('/care/records', [CaresController::class, 'caresPage'])->name('care.records')->middleware('auth');
+
+//route for scheduling a doc appointment
+// Route::get('/schedule/appointment', [ScheduleAppointmentsController])

@@ -21,9 +21,11 @@ class AppointmentsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'appt_date' => 'required',
-        'patient_id' => 'required',
-        'doctor_id' => 'required',
+            'appt_date' => 'required',
+            // 'appt_time' => 'required',
+            'appt_comment' => 'required',
+            'patient_id' => 'required',
+            'doctor_id' => 'required',
         ]);
 
         return Appointment::create($request->all());

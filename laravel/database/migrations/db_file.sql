@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS cares (
 CREATE TABLE IF NOT EXISTS appointments (
     appt_id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,                    -- unique appointment identifier
     appt_date       DATE NOT NULL,                                                      -- date of appointment
-    appt_time       TIME NOT NULL,                                                      -- time of appointment
+    -- appt_time       TIME NOT NULL,                                                      -- time of appointment
     appt_comment    VARCHAR(255),                                                       -- comments or notes for the appointment
 
     patient_id      BIGINT NOT NULL REFERENCES patients(patient_id),                    -- foreign key to patients table
@@ -122,7 +122,8 @@ CREATE TABLE IF NOT EXISTS appointments (
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,                                 -- timestamp of appointment creation
     -- updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    -- timestamp of last appointment
     
-    UNIQUE (doctor_id, appt_date, appt_time)                                            -- ensure no double-booking for doctors
+    -- UNIQUE (doctor_id, appt_date, appt_time)                                            -- ensure no double-booking for doctors
+    UNIQUE (doctor_id, appt_date)
 );
 
 CREATE TABLE IF NOT EXISTS schedules (

@@ -47,9 +47,9 @@
     input[type="text"]{
         background-color: #1c00324b !important;
     } 
-    .form-control{
+    /* .form-control{
         background: #1c0032ee;
-    }
+    } */
 </style>
 <body class="min-vh-100 position-relative">
     <div id="bckgrnd_overlay app">

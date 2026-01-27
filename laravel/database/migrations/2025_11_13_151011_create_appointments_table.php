@@ -12,13 +12,13 @@ return new class extends Migration
         {
             $table  ->  id              (column: 'appt_id');
             $table  ->  datetime        (column: 'appt_date');
-            $table  ->  time            (column: 'appt_time');
+        //     $table  ->  time            (column: 'appt_time');
 
             $table  ->  bigInteger      (column: 'patient_id')
                     ->  unsigned        ();
             $table  ->  bigInteger      (column: 'doctor_id')   
                     ->  unsigned        ();
-            $table  ->  text            (column: 'doc_comment') 
+            $table  ->  text            (column: 'appt_comment') 
                     ->  nullable        ();
             $table  ->  foreign         (columns: 'patient_id')
                     ->  references      (columns: 'patient_id')
