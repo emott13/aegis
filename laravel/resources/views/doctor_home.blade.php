@@ -24,7 +24,7 @@
             @foreach ($appointmentsPast as $appointment)
                 <tr>
                     <td>{{ $appointment->patient->user->getFullNameAttribute() }}</td>
-                    <td class="text-wrap">{{ $appointment->appt_date }}</td>
+                    <td class="text-wrap">{{ $appointment->appt_date->format('m-d-Y') }}</td>
                     <td>{{ $appointment->doc_comment }}</td>
                     <td>{{ $appointment->patient->med_morn }}</td>
                     <td>{{ $appointment->patient->med_noon }}</td>
@@ -64,7 +64,7 @@
             @foreach ($appointmentsFuture as $appointment)
                 <tr>
                     <td>{{ $appointment->patient->user->getFullNameAttribute() }}</td>
-                    <td class="text-wrap">{{ $appointment->appt_date }}</td>
+                    <td class="text-wrap">{{ $appointment->appt_date->format('m-d-Y') }}</td>
                     <td>{{ $appointment->doc_comment }}</td>
                     <td>{{ $appointment->patient->med_morn }}</td>
                     <td>{{ $appointment->patient->med_noon }}</td>

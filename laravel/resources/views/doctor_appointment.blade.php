@@ -92,7 +92,7 @@
                                 @foreach ($doctors as $doctor)
                                     <option value="{{ $doctor->emp_id }}" 
                                         {{ $doctor->emp_id == old('doctor_id') ? 'selected' : "" }}>
-                                        {{ ucfirst( $doctor->emp_id ) }}
+                                        {{ ucfirst( $doctor->fname ) }} {{ ucfirst( $doctor->lname ) }}
                                     </option>
                                 @endforeach
                             </select>

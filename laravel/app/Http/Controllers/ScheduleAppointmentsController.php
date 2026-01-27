@@ -77,18 +77,16 @@ class ScheduleAppointmentsController extends Controller
         if (!$schedule){
             throw new RuntimeException('No schedule for this date {{ $date }}.');
         }
-        $doctorAssignment = ScheduleAssignment::where('role', '=', 'doctor')
-            ->where('schedule_id', '=', )
+
+        $doctorAssignment = ScheduleAssignment::join('schedules as s', 'schedule_assignments.schedule_id', 's.schedule_id')
+            ->join('employees as e', 'schedule_assignments.emp_id', 'e.emp_id')
+            ->join('users as u', 'e.user_id', 'u.user_id')
+            ->where('role', '=', 'doctor')
+            ->where('schedule_date', '=', $date)
             ->get();
         if(!$doctorAssignment){
             throw new RuntimeException('No doctors scheduled for this day.');
         }
-
-        // $doctors = Employee::join('users', 'employees.user_id', 'users.user_id')
-        //     ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
-        //     ->where('access_roles.role_name', '=', 'doctor')
-        //     ->get();
-
 
         $patients = Patient::join('users', 'patients.user_id', 'users.user_id')
             ->join('access_roles', 'users.role_id', '=', 'access_roles.role_id')
@@ -109,10 +107,11 @@ class ScheduleAppointmentsController extends Controller
             'appt_date' => 'required|string|max:255|unique:appointments',
             // 'appt_time' => 'required|time',
             'appt_comment' => 'string|max:255',
-            'doctor_id' => 'required|exists:employees,emp_id',
+            // 'doctor_id' => 'required|exists:employees,emp_id',
             'patient_id' => 'required|exists:patients,patient_id',
         ],
-        [ // custom error messages
+        [ 
+            "Date is required!",
         ]);
         
         Appointment::create($validated);
