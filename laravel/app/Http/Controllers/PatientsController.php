@@ -51,14 +51,16 @@ class PatientsController extends Controller
 
         $order = $request->input('order', 'patient_id');                        // default sort if none provided
 
-        $query = DB::table('patients')                                          // base query
-            ->join('users', 'patients.user_id', '=', 'users.user_id')
+        $query = DB::table('patients as p')                                          // base query
+            ->join('users as u', 'p.user_id', '=', 'u.user_id')
+            ->join('emergency_contacts as e', 'p.patient_id', 'e.patient_id')
             ->select(
-                'patients.*',
-                'users.dob',
-                'users.email',
-                'users.fname',
-                'users.lname'
+                'p.*',
+                'e.*',
+                'u.dob',
+                'u.email',
+                'u.fname',
+                'u.lname',
             );
 
         switch ($order) {                                                       // dynamic sorting based on input
@@ -71,23 +73,23 @@ class PatientsController extends Controller
                 break;
 
             case 'em_name':
-                $query->orderBy('patients.em_lname')->orderBy('patients.em_fname');
+                $query->orderBy('e.em_lname')->orderBy('e.em_fname');
                 break;
 
             case 'em_phone':
-                $query->orderBy('patients.em_phone');
+                $query->orderBy('e.em_phone');
                 break;
 
             case 'em_relation':
-                $query->orderBy('patients.em_relation');
+                $query->orderBy('e.em_relation');
                 break;
 
             case 'admission_date':
-                $query->orderBy('patients.admission_date');
+                $query->orderBy('p.admission_date');
                 break;
 
             default:
-                $query->orderBy('patients.patient_id');
+                $query->orderBy('p.patient_id');
         }
 
         $patients = $query->get();

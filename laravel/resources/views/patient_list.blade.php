@@ -31,7 +31,7 @@ function formatPhoneNumber($phoneNumber) {
                     <th><a href="{{ route('patient.list', ['order' => 'dob']) }}">Age</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'em_name']) }}">Emergency Contact Name</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'em_phone']) }}">Emergency Phone</a></th>
-                    <th><a href="{{ route('patient.list', ['order' => 'em_relation']) }}">Emergency Relation</a></th>
+                    <th><a href="{{ route('patient.list', ['order' => 'relation']) }}">Emergency Relation</a></th>
                     <th><a href="{{ route('patient.list', ['order' => 'admission_date']) }}">Admission Date</a></th>
                 </tr>
             </thead>
@@ -44,7 +44,7 @@ function formatPhoneNumber($phoneNumber) {
                         <td>{{ UserController::age($patient->dob) }} years</td>
                         <td>{{ $patient->em_fname }} {{ $patient->em_lname }}</td>
                         <td>{{ formatPhoneNumber($patient->em_phone) }}</td>
-                        <td>{{ $patient->em_relation }}</td>
+                        <td>{{ $patient->relation }}</td>
                         <td>{{ $patient->admission_date }}</td>
                     </tr>
                 @endforeach

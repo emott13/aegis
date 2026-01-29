@@ -18,9 +18,10 @@ class Patient extends Model
         'family_code',
         'care_group',
         'admission_date',
-        // 'med_morn',
-        // 'med_noon',
-        // 'med_night',
+        'med_morn',
+        'med_noon',
+        'med_eve',
+        'med_night',
         'bill_amount',
         'user_id'
     ];
