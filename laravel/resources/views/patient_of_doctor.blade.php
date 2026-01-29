@@ -8,9 +8,15 @@
     <title>Patient Of Doctor</title>
 </head>
 <style>
-    .main-form label,
+    /* .main-form label,
     form > small {
         color: white;
+    } */
+    .container, 
+    .container > h1,
+    .container > h4{
+        color: black;
+        /* #1c0032 */
     }
 </style>
 
@@ -25,7 +31,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Date</th>
+                <th>Appt Date</th>
                 <th>Comment</th>
                 <th>Morning Med</th>
                 <th>Afternoon Med</th>
@@ -36,7 +42,7 @@
             @foreach ($appointments as $appointment)
                 <tr>
                     <td>{{ $appointment->patient->user->getFullNameAttribute() }}</td>
-                    <td class="text-wrap">{{ $appointment->appt_date }}</td>
+                    <td class="text-wrap">{{ $appointment->appt_date->format('m-d-Y') }}</td>
                     <td>{{ $appointment->doc_comment }}</td>
                     <td>{{ $appointment->patient->med_morn }}</td>
                     <td>{{ $appointment->patient->med_noon }}</td>
@@ -46,12 +52,12 @@
         </tbody>
     </table>
 @else
-    <h4 class="text-white text-center">You have no appointments with this patient</h4>
+    <h4 class="text-black text-center">You have no past appointments with this patient</h4>
 @endif
 
 {{-- NEW NOTE AND MEDS --}}
 <div class="container">
-    <h1 class="text-center mt-5 fw-bold">New Perscription</h1> 
+    <h1 class="text-center mt-5 fw-bold">New Prescription</h1> 
 
     {{-- NEW PERSCRIPTION FORM --}}
     @if ($appointmentToday)

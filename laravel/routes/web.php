@@ -27,7 +27,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register-approval', [RegisterController::class, 'approval'])->name('approval')->middleware('auth');
 
+// doctor home
 Route::get('/doctor/home', [Doctors::class, 'home'])->name('doctor.home')->middleware('auth');
+
+// patient of doctor
 Route::get('/doctor/patient/{patient_id}', [Doctors::class, 'patientOfDoctor'])->name('doctor.patient')->middleware('auth');
 Route::post('/doctor/patient/{patient_id}', [Doctors::class, 'patientOfDoctorPost'])->name('doctor.patient')->middleware('auth');
 
