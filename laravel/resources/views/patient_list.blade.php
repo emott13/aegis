@@ -16,12 +16,22 @@ function formatPhoneNumber($phoneNumber) {
 ?>
 
 @extends('layouts.app')
+<style>
+    .tableWrapper{
+        border-radius: 25px;
+        background-color: #1c0032ee;
+        width: 80%; 
+        margin: 0 auto;
+        padding: 1rem 2rem;
+    }
+</style>
 
 @section('content')
-<h1 class="container" style="font-weight: 600; text-align: center; color: white;">Patient List</h1>
+<div class="tableWrapper">
+    <h1 class="container" style="font-weight: 600; text-align: center; color: white;">Patient List</h1>
 
-@if ($patients->count())
-    <div style="width: 100%; padding: 0 10vw">
+    @if ($patients->count())
+    {{-- <div style="width: 100%; padding: 0 10vw"> --}}
 
         <table class="table table-sm table-striped table-hover table-border">
             <thead>
@@ -50,8 +60,10 @@ function formatPhoneNumber($phoneNumber) {
                 @endforeach
             </tbody>
         </table>
-    </div>
-@else
+    {{-- </div> --}}
+    @else
     <p>No users found.</p>
-@endif
+    @endif
+</div>
+
 @endsection

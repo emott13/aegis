@@ -65,7 +65,7 @@ class PatientsController extends Controller
 
         switch ($order) {                                                       // dynamic sorting based on input
             case 'name':
-                $query->orderBy('users.lname')->orderBy('users.fname');
+                $query->orderBy('u.lname')->orderBy('u.fname');
                 break;
 
             case 'dob':

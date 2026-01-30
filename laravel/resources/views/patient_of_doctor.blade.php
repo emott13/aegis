@@ -12,22 +12,30 @@
     form > small {
         color: white;
     } */
+    .tableWrapper{
+        border-radius: 25px;
+        background-color: #1c0032ee;
+        width: 80%; 
+        margin: 10px auto;
+        padding: 1rem 2rem;
+    }
     .container, 
     .container > h1,
     .container > h4{
-        color: black;
+        /* color: black; */
         /* #1c0032 */
     }
 </style>
 
 @section('content')
+<div class="tableWrapper">
     <h1 class="container text-center fw-bold mb-3">Patient of Doctor</h1>
 
 {{-- LINKS --}}
 
 {{-- PAST APPOINTMENTS --}}
 @if (count($appointments))
-    <table class="table table-sm table-striped table-hover table-border container">
+    <table class="table table-sm table-striped table-hover table-border">
         <thead>
             <tr>
                 <th>Name</th>
@@ -52,7 +60,7 @@
         </tbody>
     </table>
 @else
-    <h4 class="text-black text-center">You have no past appointments with this patient</h4>
+    <h4 class="text-center">You have no past appointments with this patient</h4>
 @endif
 
 {{-- NEW NOTE AND MEDS --}}
@@ -135,8 +143,9 @@
 
         </form>
     @else
-        <h4 class="text-center">This patient has no appointments with you today.</h2>
+        <h4 class="text-center">This patient has no appointments with you today.</h4>
     @endif
+</div>
 </div>
 
 @endsection
